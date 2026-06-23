@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MOEX Design Digest Preview</title>
+    <style>
+      :root {
+        --bg: #f3f3f2;
+        --paper: #ffffff;
+        --ink: #33373b;
+        --muted: #697078;
+        --red: #ff0508;
+        --beige-soft: #fff8ef;
+        --line: #e8e3dc;
+        --dark: #23272b;
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+      }
+
+      .digest-page {
+        min-height: 100vh;
+        padding: 24px 16px 64px;
+      }
+
+      .digest-shell {
+        width: min(100%, 740px);
+        margin: 0 auto;
+      }
+
+      .kicker {
+        color: var(--red);
+        font-size: 13px;
+        line-height: 17px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+
+      .hero {
+        padding: 42px 4px 30px;
+      }
+
+      .hero h1 {
+        max-width: 650px;
+        margin: 18px 0 0;
+        color: var(--ink);
+        font-size: 52px;
+        line-height: 0.98;
+        letter-spacing: -0.04em;
+      }
+
+      .hero p {
+        max-width: 620px;
+        margin: 22px 0 0;
+        color: var(--ink);
+        font-size: 18px;
+        line-height: 1.45;
+      }
+
+      .feature-card,
+      .feedback-card {
+        margin-top: 18px;
+        border-radius: 30px;
+      }
+
+      .section-header h2,
+      .feedback-card h2 {
+        margin: 12px 0 0;
+        color: var(--ink);
+        font-size: 28px;
+        line-height: 1.12;
+        letter-spacing: -0.035em;
+      }
+
+      .section-header p {
+        max-width: 100%;
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.52;
+      }
+
+      .feature-card {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 28px;
+        background: var(--paper);
+        box-shadow: 0 8px 22px rgba(63, 50, 36, 0.035);
+      }
+
+      .card-meta {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 8px 12px;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .meta-line {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 0;
+        align-items: center;
+        min-width: 0;
+        color: #8a6d5b;
+        font-size: 12px;
+        line-height: 1.35;
+        font-weight: 700;
+      }
+
+      .meta-line span:first-child {
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: rgba(248, 242, 234, 0.86);
+        color: #6f4f44;
+      }
+
+      .meta-line span + span::before {
+        content: ".";
+        margin: 0 7px;
+        color: rgba(138, 109, 91, 0.52);
+      }
+
+      .meta-line span:first-child + span::before {
+        margin-left: 8px;
+      }
+
+      .status-label {
+        flex: 0 0 auto;
+        color: rgba(105, 112, 120, 0.82);
+        font-size: 12px;
+        line-height: 1.35;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .card-meta + .section-header,
+      .card-meta + h3 {
+        margin-top: 10px;
+      }
+
+      .card-meta + .section-header > h2:first-child {
+        margin-top: 0;
+      }
+
+      .communication-work-preview,
+      .asset-preview {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        margin-top: 16px;
+        border: 0;
+        border-radius: 20px;
+        background: #f7f2ea;
+        box-shadow: 0 14px 34px rgba(78, 61, 42, 0.08);
+      }
+
+      .communication-work-card-featured .communication-work-preview {
+        border-radius: 20px;
+      }
+
+      .metric-highlight {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 16px;
+        align-items: center;
+        padding: 18px;
+        border-radius: 20px;
+        background:
+          radial-gradient(circle at 94% 0%, rgba(255, 5, 8, 0.24), transparent 9rem),
+          linear-gradient(135deg, #2f3032 0%, #202326 100%);
+        box-shadow: 0 18px 36px rgba(35, 39, 43, 0.13);
+      }
+
+      .metric-highlight strong {
+        color: #fff;
+        font-size: 58px;
+        line-height: 0.92;
+        letter-spacing: -0.05em;
+      }
+
+      .metric-highlight h3 {
+        margin: 0;
+        color: #fff;
+        font-size: 17px;
+        line-height: 1.15;
+      }
+
+      .metric-highlight span {
+        display: block;
+        margin-top: 7px;
+        color: rgba(255, 255, 255, 0.66);
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .product-visual-proof,
+      .stock-visual-proof,
+      .sigma-media {
+        margin-top: 18px;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #f7f2ea;
+      }
+
+      .stock-visual-proof {
+        height: 360px;
+      }
+
+      .asset-preview-product,
+      .asset-preview-stock,
+      .asset-preview-sigma {
+        margin-top: 0;
+        box-shadow: none;
+      }
+
+      .asset-preview-stock {
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+      }
+
+      .card-actions {
+        margin-top: 16px;
+      }
+
+      .card-action {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 12px;
+        border-radius: 999px;
+        background: #f4eee6;
+        color: var(--ink);
+        font-size: 13px;
+        line-height: 1.2;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .sigma-benefit {
+        margin: 18px 0 0;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: #f6efe6;
+        color: var(--ink);
+        font-size: 15px;
+        line-height: 1.45;
+      }
+
+      .sigma-proof {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 14px;
+        align-items: center;
+        padding: 16px 18px;
+        border-radius: 20px;
+        background: #2b2d30;
+        color: #fff;
+      }
+
+      .sigma-proof strong {
+        font-size: 42px;
+        line-height: 0.95;
+        letter-spacing: -0.045em;
+      }
+
+      .sigma-proof span {
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 14px;
+        line-height: 1.35;
+      }
+
+      .product-update {
+        margin-top: 20px;
+      }
+
+      .product-update-title {
+        color: var(--ink);
+        font-size: 13px;
+        line-height: 17px;
+        font-weight: 700;
+      }
+
+      .product-update-grid {
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .product-update-item {
+        min-height: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 0;
+        border-bottom: 1px solid #ece8e2;
+        color: var(--ink);
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .product-update-item::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        background: rgba(138, 109, 91, 0.46);
+      }
+
+      .product-update-item:last-child {
+        border-bottom: 0;
+      }
+
+      .split-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .small-card {
+        min-height: auto;
+        padding: 24px;
+        border-radius: 28px;
+        background: var(--beige-soft);
+        box-shadow: 0 8px 22px rgba(63, 50, 36, 0.035);
+      }
+
+      .small-card h3 {
+        margin: 12px 0 0;
+        font-size: 26px;
+        line-height: 1.1;
+        letter-spacing: -0.035em;
+      }
+
+      .small-card p {
+        max-width: 430px;
+        margin: 12px 0 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.45;
+      }
+
+      .ai-native-card,
+      .moex-life-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 132px;
+        gap: 12px 18px;
+        align-items: start;
+        overflow: hidden;
+      }
+
+      .ai-native-copy,
+      .moex-life-copy {
+        display: contents;
+      }
+
+      .ai-native-copy .card-meta,
+      .moex-life-copy .card-meta {
+        grid-column: 1 / -1;
+      }
+
+      .ai-native-copy h3,
+      .ai-native-copy p,
+      .moex-life-copy h3,
+      .moex-life-copy p {
+        grid-column: 1;
+      }
+
+      .ai-native-visual,
+      .moex-life-visual {
+        grid-column: 2;
+        grid-row: 2 / span 2;
+        display: grid;
+        place-items: center;
+      }
+
+      .ai-native-visual img {
+        display: block;
+        width: 132px;
+        height: 132px;
+        object-fit: contain;
+      }
+
+      .moex-life-visual {
+        height: 112px;
+        border-radius: 24px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(241, 232, 220, 0.64));
+        overflow: hidden;
+      }
+
+      .moex-life-visual img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .feedback-card {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 26px;
+        align-items: start;
+        padding: 28px;
+        background:
+          radial-gradient(circle at 90% 0%, rgba(255, 5, 8, 0.16), transparent 18rem),
+          var(--dark);
+      }
+
+      .feedback-card h2,
+      .feedback-card p {
+        color: #fff;
+      }
+
+      .feedback-card p {
+        max-width: 620px;
+        margin: 16px 0 0;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 17px;
+        line-height: 1.5;
+      }
+
+      .contacts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .contact-email {
+        display: inline-flex;
+        align-items: center;
+        min-height: 46px;
+        padding: 0 16px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        font-size: 17px;
+        line-height: 1.2;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .contact-people {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .contact-person {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 13px;
+        line-height: 1.25;
+      }
+
+      .contact-person img {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex: 0 0 auto;
+      }
+
+      @media (max-width: 560px) {
+        .digest-page {
+          padding: 14px 10px 48px;
+        }
+
+        .feature-card,
+        .feedback-card {
+          padding: 24px;
+          border-radius: 28px;
+        }
+
+        .hero {
+          padding: 30px 2px 24px;
+        }
+
+        .hero h1 {
+          font-size: 34px;
+          line-height: 1.03;
+        }
+
+        .hero p {
+          font-size: 17px;
+        }
+
+        .stock-visual-proof {
+          height: 284px;
+        }
+
+        .ai-native-card,
+        .moex-life-card {
+          grid-template-columns: 1fr;
+        }
+
+        .ai-native-visual,
+        .moex-life-visual {
+          grid-column: 1;
+          grid-row: auto;
+          justify-content: start;
+        }
+
+        .ai-native-visual img {
+          width: 104px;
+          height: 104px;
+        }
+
+        .moex-life-visual {
+          width: 118px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="digest-page">
+      <section class="digest-shell">
+        <header class="hero">
+          <div class="hero-copy">
+            <div class="kicker">Центр дизайна MOEX</div>
+            <h1>Московская биржа обновляется через дизайн</h1>
+            <p>
+              Привет! Это наш пилотный выпуск. В нём показываем, как дизайн-команда
+              MOEX работает с визуальным языком, продуктами, дизайн-системой Сигма
+              и внутренними сервисами. Планируем делиться новостями регулярно -
+              следите за рассылкой.
+            </p>
+          </div>
+        </header>
+
+        <section class="feature-card communication-work-card communication-work-card-featured">
+          <div class="feature-content">
+            <div class="card-meta">
+              <div class="meta-line">
+                <span>Коммуникационный дизайн</span><span>Бренд-гайд</span><span>Визуальный язык</span>
+              </div>
+              <span class="status-label">Запущен</span>
+            </div>
+            <div class="section-header">
+              <h2>Новый стиль MOEX</h2>
+              <p>Обновляем визуальный язык Московской биржи: он стал чище, легче и визуально премиальнее благодаря новым иллюстрациям и обновлённой палитре. Следующий шаг - финализация бренд-гайдов компании.</p>
+            </div>
+            <img class="communication-work-preview" src="/cases/design-digest-assets/moex-brand-style.png" alt="Фрагмент нового визуального стиля MOEX" />
+          </div>
+        </section>
+
+        <section class="feature-card feature-product">
+          <div class="feature-content">
+            <div class="card-meta">
+              <div class="meta-line">
+                <span>Продуктовый дизайн</span><span>Сайт MOEX</span><span>Главная</span><span>Витрина</span>
+              </div>
+              <span class="status-label">Запущен</span>
+            </div>
+            <div class="section-header">
+              <h2>Новый сайт MOEX и клиентские сценарии</h2>
+              <p>Запустили новую главную страницу MOEX. Бенто-сетка помогла сделать промо-блоки заметнее и понятнее. Также обновили блок «Новости» и витрину продуктов, продолжаем работу над внутренними страницами.</p>
+            </div>
+            <div class="metric-highlight">
+              <strong>+66%</strong>
+              <div>
+                <h3>кликабельность промо-блоков</h3>
+                <span>Бенто-сетка помогла сделать сценарии заметнее и понятнее.</span>
+              </div>
+            </div>
+            <div class="product-visual-proof">
+              <img class="asset-preview asset-preview-product" src="/cases/design-digest-assets/moex-site-bento.png" alt="Превью новой главной страницы сайта MOEX" />
+            </div>
+            <div class="card-actions">
+              <a class="card-action" href="https://moex.com" target="_blank" rel="noreferrer">Смотреть</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="feature-card feature-product">
+          <div class="feature-content">
+            <div class="card-meta">
+              <div class="meta-line">
+                <span>Продуктовый дизайн</span><span>Сайт MOEX</span><span>Акции</span><span>Инвесторы</span>
+              </div>
+              <span class="status-label">Запущен</span>
+            </div>
+            <div class="section-header">
+              <h2>Страница акций: понятнее для инвесторов</h2>
+              <p>Обновили страницу акций на сайте MOEX: ключевые данные стали понятнее, а закреплённая карточка покупки помогает быстрее перейти к действию после изучения страницы.</p>
+            </div>
+            <div class="stock-visual-proof">
+              <img class="asset-preview asset-preview-stock" src="/cases/design-digest-assets/moex-stock-page.png" alt="Превью страницы акций MOEX" />
+            </div>
+            <div class="card-actions">
+              <a class="card-action" href="https://www.moex.com/ru/stocks/moex" target="_blank" rel="noreferrer">Смотреть</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="feature-card communication-work-card">
+          <div class="feature-content">
+            <div class="card-meta">
+              <div class="meta-line">
+                <span>Коммуникационный дизайн</span><span>PowerPoint</span><span>Корпоративный стиль</span>
+              </div>
+              <span class="status-label">Запущен</span>
+            </div>
+            <div class="section-header">
+              <h2>Шаблоны презентаций</h2>
+              <p>Подготовили единый PowerPoint-шаблон и установочный файл для сотрудников. Команды получают готовый корпоративный инструмент для регулярных презентаций и материалов.</p>
+            </div>
+            <img class="communication-work-preview communication-work-preview-top" src="/cases/design-digest-assets/moex-presentation-template.png" alt="Превью шаблона презентации MOEX" />
+            <div class="card-actions">
+              <a class="card-action" href="https://life.moex.com/wikilist/shablony_ppt_docs" target="_blank" rel="noreferrer">Скачать шаблон</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="feature-card communication-work-card">
+          <div class="feature-content">
+            <div class="card-meta">
+              <div class="meta-line">
+                <span>Коммуникационный дизайн</span><span>SMM</span><span>Шаблоны</span>
+              </div>
+              <span class="status-label">Запущен</span>
+            </div>
+            <div class="section-header">
+              <h2>Новый стиль СММ</h2>
+              <p>Обновили подход к соцсетям: цвета, шрифты, визуальный язык и набор шаблонов. Это помогает SMM-команде быстрее выпускать материалы без ручной сборки каждого макета.</p>
+            </div>
+            <img class="communication-work-preview communication-work-preview-right" src="/cases/design-digest-assets/moex-smm-style.png" alt="Превью нового стиля СММ MOEX" />
+          </div>
+        </section>
+
+        <section class="feature-card feature-sigma">
+          <div class="feature-content">
+            <div class="card-meta">
+              <div class="meta-line">
+                <span>Дизайн-система Сигма</span><span>Компоненты</span><span>Правила</span><span>Паттерны</span>
+              </div>
+              <span class="status-label">Запущен</span>
+            </div>
+            <div class="section-header">
+              <h2>Σ Сигма: дизайн-система для продуктов</h2>
+              <p>Раньше мы развивали ЕДС как набор компонентов и правил. Теперь перестраиваем подход: Σ Сигма объединяет наши знания, технологии и опыт, помогает быстрее отвечать на запросы продуктов и бизнеса и сохранять единое дизайн-ДНК Московской биржи.</p>
+            </div>
+            <p class="sigma-benefit">Сигма помогает командам быстрее собирать сложные интерфейсы в едином стиле и меньше тратить время на кастомные решения.</p>
+            <div class="sigma-proof">
+              <strong>1 600+</strong>
+              <span>иконок добавили в Сигму для сайтов, продуктов и презентаций</span>
+            </div>
+            <div class="sigma-media">
+              <img class="asset-preview asset-preview-sigma" src="/cases/design-digest-assets/sigma-design-system.png" alt="Превью материалов дизайн-системы Сигма" />
+            </div>
+            <div class="sigma-updates">
+              <div class="product-update">
+                <div class="product-update-title">Что добавили в Сигму</div>
+                <div class="product-update-grid">
+                  <div class="product-update-item">Новые компоненты: Calendar, Chip / Chips Group</div>
+                  <div class="product-update-item">Документация и правила использования</div>
+                  <div class="product-update-item">Библиотека иконок</div>
+                  <div class="product-update-item">Табличные ячейки и шаблоны для системных интерфейсов</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="split-row">
+          <article class="small-card ai-native-card">
+            <div class="ai-native-copy">
+              <div class="card-meta">
+                <div class="meta-line">
+                  <span>Продуктовый дизайн</span><span>AI native</span><span>Таблицы</span><span>Статусы</span>
+                </div>
+                <span class="status-label">Пилот</span>
+              </div>
+              <h3>Orbit и Process Garden</h3>
+              <p>Пробуем AI native-подход как способ быстрее собирать и проверять сложные внутренние интерфейсы: страницы с таблицами, статусами, действиями и понятным контекстом.</p>
+            </div>
+            <div class="ai-native-visual">
+              <img src="/cases/design-digest-assets/orbit-process-garden-icon.png" alt="Визуальный акцент Orbit и Process Garden" />
+            </div>
+          </article>
+
+          <article class="small-card moex-life-card">
+            <div class="moex-life-copy">
+              <div class="card-meta">
+                <div class="meta-line">
+                  <span>Продуктовый дизайн</span><span>MOEX Life</span><span>Портал</span><span>Сотрудники</span>
+                </div>
+                <span class="status-label">Запуск в июне</span>
+              </div>
+              <h3>Делаем MOEX Life удобнее</h3>
+              <p>Работаем над редизайном внутреннего портала: смотрим на ежедневные сценарии сотрудников, навигацию, новый логотип и более аккуратную визуальную подачу.</p>
+            </div>
+            <div class="moex-life-visual">
+              <img src="/cases/design-digest-assets/moex-life-pug.png" alt="Визуальный акцент MOEX Life" />
+            </div>
+          </article>
+        </section>
+
+        <footer class="feedback-card">
+          <div>
+            <div class="kicker">Обратная связь</div>
+            <h2>Есть задача, которую стоит<br />обсудить с дизайном?</h2>
+            <p>
+              Поможем разобраться, какой формат работы подойдёт: обновить клиентский
+              сценарий, собрать интерфейс быстрее, привести материалы к единому
+              стилю или найти понятное решение для пользователей. Напишите на общий
+              ящик Центра дизайна - команда подскажет формат работы и направит
+              задачу внутри центра.
+            </p>
+          </div>
+          <div class="contacts">
+            <a class="contact-email" href="mailto:design@moex.com">design@moex.com</a>
+            <div class="contact-people" aria-label="Контакты Центра дизайна">
+              <div class="contact-person">
+                <img src="/cases/design-digest-assets/vasiliy-avatar.png" alt="Василь Акулов" />
+                <span>Василь Акулов</span>
+              </div>
+              <div class="contact-person">
+                <img src="/cases/design-digest-assets/igor-avatar.png" alt="Игорь Семёнов" />
+                <span>Игорь Семёнов</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

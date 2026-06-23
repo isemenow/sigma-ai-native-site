@@ -695,6 +695,46 @@ function CaseComparisonSlide({ section }) {
   );
 }
 
+function ScrollableEmailPreview() {
+  const stopPreviewScroll = (event) => event.stopPropagation();
+
+  return (
+    <div className="relative z-50 w-full max-w-[880px] overflow-hidden rounded-[30px] border border-black/5 bg-white shadow-[0_26px_80px_rgba(51,55,59,.16)] pointer-events-auto">
+      <div className="border-b border-black/5 bg-white px-6 py-4">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <div className="text-[15px] font-black leading-tight text-[#33373B]">Центр дизайна MOEX</div>
+            <div className="mt-1 text-[12px] font-medium leading-tight text-[#33373B]/48">design@moex.com</div>
+          </div>
+          <div className="shrink-0 text-right text-[12px] font-medium leading-tight text-[#33373B]/46">
+            <div>23 мая 2025 г.</div>
+            <div className="mt-1">Кому: подписчикам</div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="relative z-50 h-[min(620px,70vh)] overflow-hidden bg-[#f3f3f2] pointer-events-auto"
+        onWheelCapture={stopPreviewScroll}
+        onWheel={stopPreviewScroll}
+        onTouchMove={stopPreviewScroll}
+        tabIndex={0}
+      >
+        {/* Subtle bottom gradient */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 bg-gradient-to-t from-[#f3f3f2]/60 to-transparent" />
+        {/* Scroll hint */}
+        <div className="pointer-events-none absolute bottom-2 left-1/2 z-10 -translate-x-1/2 text-[11px] font-medium tracking-[0.06em] text-[#33373B]/20">
+          прокрутите письмо ↓
+        </div>
+        <iframe
+          title="Email дайджест Центра дизайна MOEX"
+          src="/cases/design-digest-email-preview.html"
+          className="h-full w-full border-0 pointer-events-auto"
+        />
+      </div>
+    </div>
+  );
+}
+
 function CommunicationCaseSlide({ section }) {
   return (
     <motion.section
@@ -703,7 +743,7 @@ function CommunicationCaseSlide({ section }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -18 }}
       transition={{ duration: 0.34, ease: "easeOut" }}
-      className="relative z-10 mx-auto grid h-[100svh] max-h-[100svh] max-w-[1440px] grid-cols-1 gap-6 overflow-visible px-5 pb-10 pt-20 md:px-8 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1.4fr)] lg:items-center lg:pt-20 xl:px-10"
+      className="relative mx-auto grid h-[100svh] max-h-[100svh] max-w-[1440px] grid-cols-1 gap-6 overflow-visible px-5 pb-10 pt-20 md:px-8 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1.4fr)] lg:items-center lg:pt-20 xl:px-10"
     >
       {/* Left zone: content */}
       <div className="flex flex-col justify-center">
@@ -714,15 +754,9 @@ function CommunicationCaseSlide({ section }) {
         <h1 className={cx("max-w-[540px] font-black text-[#33373B]", TITLE_STYLES[titleVariant(section)])}>{section.title}</h1>
         <p className="mt-4 max-w-[520px] text-[clamp(15px,1.2vw,18px)] leading-[1.3] tracking-[-0.02em] text-[#33373B]/72">{section.subtitle}</p>
 
-        {/* Metric accent */}
-        <div className="mt-5 inline-flex items-center gap-3 self-start rounded-[14px] border border-[#FF0508]/10 bg-[#FF0508]/5 px-4 py-2.5">
-          <span className="text-[26px] font-black leading-none tracking-[-0.03em] text-[#FF0508]">+66%</span>
-          <span className="text-[13px] font-medium leading-snug text-[#33373B]/55">CTR промо-блоков</span>
-        </div>
-
         {/* Chips */}
         {section.points && (
-          <div className="mt-4 flex flex-wrap gap-1.5">
+          <div className="mt-5 flex flex-wrap gap-1.5">
             {section.points.map((p) => (
               <span key={p} className="rounded-full border border-black/5 bg-white/65 px-2.5 py-0.5 text-[12px] font-medium text-[#33373B]/65">{p}</span>
             ))}
@@ -737,13 +771,9 @@ function CommunicationCaseSlide({ section }) {
         )}
       </div>
 
-      {/* Right zone: email mockup */}
-      <div className="relative flex h-full min-h-0 w-full items-center justify-center overflow-visible pr-4">
-        <img
-          src="/cases/design-digest-email-mockup.png"
-          alt="Email дайджест"
-          className="block max-h-[660px] w-auto rounded-[14px] shadow-[0_20px_60px_rgba(51,55,59,.14)]"
-        />
+      {/* Right zone: email preview */}
+      <div className="relative z-50 flex h-full min-h-0 w-full items-center justify-center overflow-visible pr-4 pointer-events-auto">
+        <ScrollableEmailPreview />
       </div>
     </motion.section>
   );
