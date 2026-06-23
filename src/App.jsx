@@ -158,6 +158,22 @@ const sections = [
   },
   {
     id: "10",
+    eyebrow: "КЕЙС / КОММУНИКАЦИИ",
+    title: "По тем же правилам собирается email-дайджест",
+    subtitle:
+      "На том же принципе мы собрали рассылку для дизайн-студии: единый визуальный язык, повторяемые блоки и быстрая сборка материалов без ручной пересборки с нуля.",
+    points: [
+      "email-дайджест",
+      "модульная сборка",
+      "единый визуальный язык",
+      "быстрое тиражирование",
+    ],
+    formula:
+      "Sigma помогает собирать не только интерфейсы, но и коммуникационные материалы в едином стиле.",
+    visual: "mockup",
+  },
+  {
+    id: "11",
     eyebrow: "РАБОЧИЙ СЦЕНАРИЙ",
     title: "Один запрос превращается в ревью интерфейса",
     subtitle:
@@ -170,7 +186,7 @@ const sections = [
     visual: "case",
   },
   {
-    id: "11",
+    id: "12",
     eyebrow: "ОПЕРАЦИОННАЯ МОДЕЛЬ",
     title: "AI берёт на себя рутину, человек — решение",
     subtitle: "AI не отдельная фича, а способ сократить ручную работу и держать качество.",
@@ -178,7 +194,7 @@ const sections = [
     visual: "hub",
   },
   {
-    id: "12",
+    id: "13",
     eyebrow: "ПОДКЛЮЧЕНИЕ ПРОДУКТОВ",
     title: "Два сценария подключения продуктов",
     subtitle:
@@ -190,7 +206,7 @@ const sections = [
     visual: "bridge",
   },
   {
-    id: "13",
+    id: "14",
     eyebrow: "ЦЕННОСТЬ ДЛЯ КОМАНДЫ",
     title: "Что получает продуктовая команда",
     subtitle: "Не просто библиотеку, а понятный способ быстрее двигаться к единому интерфейсу.",
@@ -198,7 +214,7 @@ const sections = [
     visual: "review",
   },
   {
-    id: "14",
+    id: "15",
     eyebrow: "ROADMAP",
     title: "Пилоты и постепенное масштабирование",
     subtitle: "Запускаем подход через фокусные сценарии, проверяем эффект и расширяем библиотеку skills.",
@@ -211,7 +227,7 @@ const sections = [
     visual: "roadmap",
   },
   {
-    id: "15",
+    id: "16",
     eyebrow: "ПИЛОТ",
     title: "Запуск пилота — в три шага",
     subtitle: "Если продукту нужно обновление интерфейса, быстрый прототип или переход к единым правилам — можно начать с пилота.",
@@ -679,6 +695,60 @@ function CaseComparisonSlide({ section }) {
   );
 }
 
+function CommunicationCaseSlide({ section }) {
+  return (
+    <motion.section
+      key={section.id}
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -18 }}
+      transition={{ duration: 0.34, ease: "easeOut" }}
+      className="relative z-10 mx-auto grid h-[100svh] max-h-[100svh] max-w-[1440px] grid-cols-1 gap-6 overflow-visible px-5 pb-10 pt-20 md:px-8 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1.4fr)] lg:items-center lg:pt-20 xl:px-10"
+    >
+      {/* Left zone: content */}
+      <div className="flex flex-col justify-center">
+        <div className="mb-4 flex items-center gap-4">
+          <span className="rounded-full bg-[#FF0508] px-3 py-1 text-xs font-black tracking-widest text-white">{section.id}</span>
+          <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#33373B]/45">{section.eyebrow}</span>
+        </div>
+        <h1 className={cx("max-w-[540px] font-black text-[#33373B]", TITLE_STYLES[titleVariant(section)])}>{section.title}</h1>
+        <p className="mt-4 max-w-[520px] text-[clamp(15px,1.2vw,18px)] leading-[1.3] tracking-[-0.02em] text-[#33373B]/72">{section.subtitle}</p>
+
+        {/* Metric accent */}
+        <div className="mt-5 inline-flex items-center gap-3 self-start rounded-[14px] border border-[#FF0508]/10 bg-[#FF0508]/5 px-4 py-2.5">
+          <span className="text-[26px] font-black leading-none tracking-[-0.03em] text-[#FF0508]">+66%</span>
+          <span className="text-[13px] font-medium leading-snug text-[#33373B]/55">CTR промо-блоков</span>
+        </div>
+
+        {/* Chips */}
+        {section.points && (
+          <div className="mt-4 flex flex-wrap gap-1.5">
+            {section.points.map((p) => (
+              <span key={p} className="rounded-full border border-black/5 bg-white/65 px-2.5 py-0.5 text-[12px] font-medium text-[#33373B]/65">{p}</span>
+            ))}
+          </div>
+        )}
+
+        {/* Supporting text */}
+        {section.formula && (
+          <div className="mt-4 max-w-[480px] text-[15px] leading-snug text-[#33373B]/55">
+            {section.formula}
+          </div>
+        )}
+      </div>
+
+      {/* Right zone: email mockup */}
+      <div className="relative flex h-full min-h-0 w-full items-center justify-center overflow-visible pr-4">
+        <img
+          src="/cases/design-digest-email-mockup.png"
+          alt="Email дайджест"
+          className="block max-h-[660px] w-auto rounded-[14px] shadow-[0_20px_60px_rgba(51,55,59,.14)]"
+        />
+      </div>
+    </motion.section>
+  );
+}
+
 function ServiceVisual() { return <div className="relative h-[380px] w-[500px]"><motion.div className="absolute left-[42%] top-[78%] h-20 w-[340px] -translate-x-1/2 rounded-[50%] bg-black/10 blur-2xl" animate={{ opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 5.6, repeat: Infinity }} /><Float className="absolute left-[42%] top-8 h-[286px] w-[360px] -translate-x-1/2 rounded-[32px] border border-white bg-white/92 p-5 shadow-[0_30px_70px_rgba(51,55,59,.15)]"><div className="mb-5 flex items-center justify-between"><div className="text-xs font-black uppercase tracking-[0.18em] text-[#33373B]/42">фирменный шаблон</div><div className="h-7 w-14 rounded-sm bg-[#FF0508]" /></div><div className="grid grid-cols-[1fr_72px] gap-3"><div className="space-y-3"><div className="h-10 rounded-[18px] bg-[#33373B]" /><div className="h-20 rounded-[22px] bg-[#F2F2F2]" /><div className="grid grid-cols-3 gap-2"><div className="h-16 rounded-2xl bg-[#EEE7DC]" /><div className="h-16 rounded-2xl bg-[#F2F2F2]" /><div className="h-16 rounded-2xl bg-[#FF0508]/90" /></div></div><div className="space-y-2">{[0,1,2,3].map((i) => <div key={i} className={cx("h-12 rounded-2xl border border-black/5", i === 1 ? "bg-[#FF0508]/12" : "bg-[#F2F2F2]")} />)}</div></div></Float><div className="absolute bottom-6 left-[42%] -translate-x-1/2 rounded-full border border-black/5 bg-white/80 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#33373B]/55 shadow-sm">презентация собрана в шаблоне</div></div>; }
 
 function ContentBlock({ section }) {
@@ -699,7 +769,7 @@ function Comparison({ title, items, muted }) { return <div className={cx("rounde
 function Cards({ cards }) { return <div className="mt-4 grid max-w-[860px] gap-3 md:grid-cols-2">{cards.map(({ icon: Icon, name, text }) => <div key={name} className="rounded-[20px] border border-black/5 bg-white/60 p-3.5 shadow-sm"><Icon className="mb-2 text-[#FF0508]" size={22}/><div className="text-[17px] font-black text-[#33373B]">{name}</div><div className="mt-1 text-[14px] leading-snug text-[#33373B]/66">{text}</div></div>)}</div>; }
 function Columns({ columns }) { return <div className="mt-5 grid max-w-[860px] gap-3 md:grid-cols-2">{columns.map((col) => <div key={col.name} className="rounded-[22px] border border-black/5 bg-white/60 p-4 shadow-sm"><div className="mb-4 text-[22px] font-black leading-tight text-[#33373B]">{col.name}</div><div className="space-y-2.5">{col.items.map((item, i) => <div key={item} className="flex gap-3 text-[15px] leading-snug text-[#33373B]/72"><span className="font-black text-[#FF0508]">{String(i+1).padStart(2,"0")}</span>{item}</div>)}</div></div>)}</div>; }
 function Roadmap({ roadmap }) { return <div className="mt-5 grid max-w-[980px] gap-3 md:grid-cols-4">{roadmap.map((r) => <div key={r.period} className="rounded-[22px] border border-black/5 bg-white/60 px-4 py-4 shadow-sm"><div className="mb-3 text-[20px] font-black leading-tight text-[#FF0508]">{r.period}</div><div className="space-y-2">{r.items.map((item) => <div key={item} className="text-[14px] leading-snug text-[#33373B]/72">— {item}</div>)}</div></div>)}</div>; }
-function Slide({ section }) { return section.caseComparison ? <CaseComparisonSlide section={section} /> : <motion.section key={section.id} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.34, ease: "easeOut" }} className="relative z-10 mx-auto grid h-[100svh] max-h-[100svh] max-w-[1440px] grid-cols-1 gap-8 overflow-visible px-5 pb-10 pt-20 md:px-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(390px,.88fr)] lg:items-center lg:pt-20 xl:px-10"><ContentBlock section={section} /><Visual type={section.visual} /></motion.section>; }
+function Slide({ section }) { return section.caseComparison ? <CaseComparisonSlide section={section} /> : section.visual === "mockup" ? <CommunicationCaseSlide section={section} /> : <motion.section key={section.id} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.34, ease: "easeOut" }} className="relative z-10 mx-auto grid h-[100svh] max-h-[100svh] max-w-[1440px] grid-cols-1 gap-8 overflow-visible px-5 pb-10 pt-20 md:px-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(390px,.88fr)] lg:items-center lg:pt-20 xl:px-10"><ContentBlock section={section} /><Visual type={section.visual} /></motion.section>; }
 function SlideCounter({ active }) {
   return (
     <div className="pointer-events-none fixed bottom-9 right-9 z-[25] flex items-end gap-2 select-none">
