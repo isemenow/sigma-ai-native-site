@@ -109,7 +109,6 @@ const sections = [
     proof: {
       name: "Вячеслав Подгорнов",
       image: "/avatars/podgornov-v.png",
-      note: "продуктовый контекст",
     },
     visual: "benchmark",
   },
@@ -126,8 +125,8 @@ const sections = [
       "решение родилось из практики, а не из теории",
     ],
     proof: [
-      { name: "Андрей Бурилов", image: "/avatars/burilov-a.png", note: "продуктовый контекст" },
-      { name: "Алексей Яковенко", image: "/avatars/yakovenko-a.png", note: "владелец продукта" },
+      { name: "Андрей Бурилов", image: "/avatars/burilov-a.png" },
+      { name: "Алексей Яковенко", image: "/avatars/yakovenko-a.png" },
     ],
     visual: "iteration",
   },
@@ -146,7 +145,6 @@ const sections = [
     proof: {
       name: "Анна Колдаева",
       image: "/avatars/koldaeva-a.png",
-      note: "продуктовый контекст",
     },
     visual: "service",
   },
@@ -634,7 +632,7 @@ function ContentBlock({ section }) {
 function ProofBlock({ data }) {
   const items = Array.isArray(data) ? data : [data];
   return <div className="mt-7 flex flex-wrap items-center gap-3">{
-    items.map((p) => <div key={p.name} className="flex items-center gap-3 rounded-full border border-black/5 bg-white/70 px-4 py-2 shadow-sm"><img src={p.image} alt="" className="h-10 w-10 rounded-full object-cover ring-1 ring-black/5" /><div><div className="text-sm font-bold text-[#33373B]">{p.name}</div><div className="text-xs font-medium text-[#33373B]/45">{p.note}</div></div></div>)
+    items.map((p) => <div key={p.name} className="flex items-center gap-3 rounded-full border border-black/5 bg-white/70 px-4 py-2 shadow-sm"><img src={p.image} alt="" className="h-10 w-10 rounded-full object-cover ring-1 ring-black/5" /><div><div className="text-sm font-bold text-[#33373B]">{p.name}</div></div></div>)
   }</div>;
 }
 function ProblemInsight({ section }) { return <div className="mt-4 max-w-[900px]"><div className="grid gap-3 md:grid-cols-3">{section.problemCards.map((card) => <div key={card.title} className="rounded-[20px] border border-black/5 bg-white/60 p-3.5 shadow-sm"><div className="mb-2 min-h-[44px] border-l-[5px] border-[#FF0508] pl-3 text-[17px] font-black leading-tight text-[#33373B]">{card.title}</div><div className="text-[14px] leading-snug text-[#33373B]/70">{card.text}</div></div>)}</div><div className="mt-3 flex gap-4"><div className="pt-1 text-base font-black text-[#FF0508]">Итог</div><div className="text-[clamp(18px,1.6vw,22px)] font-black leading-[1.08] tracking-[-0.03em] text-[#33373B]">{section.conclusion}</div></div><div className="mt-3 rounded-[20px] bg-[#E9E9E9] p-3.5 text-[clamp(15px,1.2vw,17px)] font-medium leading-snug tracking-[-0.02em] text-[#33373B]/86">{section.callout}</div></div>; }
