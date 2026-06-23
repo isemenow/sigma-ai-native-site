@@ -99,36 +99,44 @@ const sections = [
     eyebrow: "КЕЙС / БЕНЧМАРК",
     title: "Process Garden / MPG",
     subtitle:
-      "Бенчмарк продуктового сценария, который можно использовать как основу для похожих решений.",
+      "MPG / Process Garden — контур для сложных внутренних процессов: заявки, согласования, маршруты и ответственные. На примере закупки проверяем, как Sigma делает такой сценарий понятнее.",
     points: [
-      "реальный бизнес-запрос",
-      "эталонный сценарий",
-      "быстрая сборка прототипа",
-      "статус: идёт сборка",
+      "закупочный процесс",
+      "маршрут заявки",
+      "роли и действия",
+      "benchmark: идёт сборка",
     ],
     proof: {
       name: "Вячеслав Подгорнов",
       image: "/avatars/podgornov-v.png",
     },
-    visual: "benchmark",
+    caseComparison: {
+      before: "/cases/process-garden-before.png",
+      after: "/cases/process-garden-after.png",
+    },
+    visual: "case-comparison",
   },
   {
     id: "08",
     eyebrow: "КЕЙС / АПРОБАЦИЯ",
     title: "Orbit",
     subtitle:
-      "Реальный продуктовый кейс, на котором подход Sigma AI Native прошёл несколько итераций и стал рабочей моделью.",
+      "Orbit — внутренний контур управления целями, инициативами, задачами и ресурсами команды. Кейс показывает переход от Sigma Core без продуктового слоя к рабочей продуктовой модели.",
     points: [
-      "несколько подходов к внедрению",
-      "переход к модели core + product layer",
-      "проверка подхода на реальном продукте",
-      "решение родилось из практики, а не из теории",
+      "цели и ресурсы",
+      "управленческий контур",
+      "Sigma Core + product layer",
+      "апробация на реальном продукте",
     ],
     proof: [
       { name: "Андрей Бурилов", image: "/avatars/burilov-a.png" },
       { name: "Алексей Яковенко", image: "/avatars/yakovenko-a.png" },
     ],
-    visual: "iteration",
+    caseComparison: {
+      before: "/cases/orbit-before.png",
+      after: "/cases/orbit-after.png",
+    },
+    visual: "case-comparison",
   },
   {
     id: "09",
@@ -257,8 +265,6 @@ function Visual({ type }) {
         {type === "portal" && <PortalVisual />}
         {type === "insight" && <InsightVisual />}
         {type === "codefiles" && <CodeFilesVisual />}
-        {type === "benchmark" && <BenchmarkVisual />}
-        {type === "iteration" && <IterationVisual />}
         {type === "service" && <ServiceVisual />}
       </div>
     </div>
@@ -590,38 +596,88 @@ function ReviewVisual() { return <div className="relative h-[360px] w-[520px] ov
 function RoadmapVisual() { return <div className="relative h-[360px] w-[540px]"><motion.div className="absolute left-1/2 top-[72%] h-20 w-[410px] -translate-x-1/2 rounded-[50%] bg-black/10 blur-2xl" animate={{ opacity: [0.34, 0.54, 0.34] }} transition={{ duration: 6, repeat: Infinity }} /><div className="absolute left-12 top-[170px] h-3 w-[430px] rounded-full bg-[#33373B]/12" /><motion.div className="absolute left-12 top-[170px] h-3 w-[430px] origin-left rounded-full bg-[#FF0508] shadow-[0_12px_34px_rgba(255,5,8,.18)]" animate={{ scaleX: [0.12, 1, 0.12] }} transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut" }} />{[{ p: "Q3", label: "пилоты", c: "left-4 top-[114px]" },{ p: "Q4", label: "документация", c: "left-[204px] top-[80px]" },{ p: "2027", label: "масштаб", c: "right-4 top-[114px]" }].map((item, i) => <Float key={item.p} delay={i * 0.5} className={cx("absolute flex h-[120px] w-36 flex-col items-center justify-center rounded-[28px] bg-[linear-gradient(145deg,#ffffff,#e9e3da)] px-4 text-center shadow-[0_28px_62px_rgba(51,55,59,.15)]", item.c)}><div className="text-2xl font-black text-[#33373B]">{item.p}</div><div className="mt-2 text-[11px] font-black uppercase leading-tight tracking-[0.08em] text-[#FF0508]">{item.label}</div></Float>)}</div>; }
 function PortalVisual() { return <div className="relative h-[380px] w-[560px]"><motion.div className="absolute left-1/2 top-[70%] h-24 w-[410px] -translate-x-1/2 rounded-[50%] bg-black/10 blur-2xl" animate={{ scale: [0.95, 1.04, 0.95], opacity: [0.42, 0.62, 0.42] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} /><motion.div className="absolute left-1/2 top-[46%] flex h-72 w-72 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[64px] border-[18px] border-[#FF0508] bg-white/20 shadow-[0_30px_80px_rgba(255,5,8,.14)]" animate={{ y: [0, -8, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}><div className="h-40 w-52 rounded-[34px] bg-[linear-gradient(145deg,#ffffff,#e9e3da)] p-5 shadow-[inset_0_2px_0_rgba(255,255,255,.85),0_28px_58px_rgba(51,55,59,.13)]"><div className="mb-4 flex items-center gap-3"><span className="h-4 w-4 rounded-full bg-[#FF0508]" /><div className="h-4 flex-1 rounded bg-[#EEE7DC]" /></div><div className="h-16 rounded-[22px] bg-[#F2F2F2] shadow-[inset_0_1px_8px_rgba(51,55,59,.06)]" /></div></motion.div><div className="absolute bottom-12 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full bg-[#33373B] px-6 py-3 text-sm font-bold text-white shadow-[0_16px_34px_rgba(51,55,59,.16)]"><span className="h-2.5 w-2.5 rounded-full bg-[#FF0508]" />пилот готов к запуску</div></div>; }
 
-function ScreenMock({ title, variant = "before", delay = 0 }) {
-  const accent = variant === "after" ? "bg-[#FF0508]" : "bg-[#33373B]/28";
+function CaseComparisonVisual({ before, after }) {
+  const dot = "h-2.5 w-2.5 rounded-full";
   return (
-    <Float delay={delay} className="h-[262px] w-[250px] rounded-[28px] border border-white/85 bg-white/92 p-4 shadow-[0_28px_64px_rgba(51,55,59,.14)]">
-      <div className="mb-3 flex items-center justify-between">
-        <div className={cx("rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-white", variant === "after" ? "bg-[#FF0508]" : "bg-[#33373B]/55")}>{title}</div>
-        <div className="flex gap-1.5"><span className="h-2 w-2 rounded-full bg-black/12" /><span className="h-2 w-2 rounded-full bg-black/12" /></div>
-      </div>
-      <div className="grid grid-cols-[48px_1fr] gap-3">
-        <div className="space-y-2">
-          <div className={cx("h-7 rounded-xl", accent)} />
-          <div className="h-7 rounded-xl bg-[#EEE7DC]" />
-          <div className="h-7 rounded-xl bg-[#EEE7DC]" />
-          <div className="h-16 rounded-2xl bg-[#F2F2F2]" />
-        </div>
-        <div className="space-y-3">
-          <div className="h-8 rounded-2xl bg-[#F2F2F2]" />
-          <div className="grid grid-cols-2 gap-2">
-            <div className="h-16 rounded-2xl bg-[#EEE7DC]" />
-            <div className="h-16 rounded-2xl bg-[#F2F2F2]" />
+    <div className="flex items-center justify-center gap-4 xl:gap-6">
+      {/* Before */}
+      <div className="flex flex-col items-center gap-2">
+        <span className="rounded-full bg-[#33373B]/55 px-3 py-0.5 text-[11px] font-black uppercase tracking-[0.14em] text-white">Было</span>
+        <div className="overflow-hidden rounded-[10px] border border-black/8 bg-white shadow-[0_12px_36px_rgba(51,55,59,.12)]">
+          <div className="flex h-7 items-center gap-1.5 border-b border-black/5 bg-[#F2F2F2]/60 px-3">
+            <span className={cx(dot, "bg-[#FF5F57]")} />
+            <span className={cx(dot, "bg-[#FEBC2E]")} />
+            <span className={cx(dot, "bg-[#28C840]")} />
+            <div className="ml-5 flex-1" />
           </div>
-          <div className="h-20 rounded-[20px] border border-black/5 bg-[#F7F7F7]" />
-          <div className={cx("h-8 w-24 rounded-2xl", variant === "after" ? "bg-[#FF0508]" : "bg-[#33373B]/25")} />
+          <img src={before} alt="Было" className="block w-full object-contain" />
         </div>
       </div>
-    </Float>
+
+      {/* Arrow */}
+      <motion.div
+        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#FF0508] text-white shadow-[0_3px_10px_rgba(255,5,8,.16)]"
+        animate={{ x: [0, 3, 0] }}
+        transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <ArrowRight size={14} />
+      </motion.div>
+
+      {/* After */}
+      <div className="flex flex-col items-center gap-2">
+        <span className="rounded-full bg-[#FF0508] px-3 py-0.5 text-[11px] font-black uppercase tracking-[0.14em] text-white">Стало</span>
+        <div className="overflow-hidden rounded-[10px] border border-black/8 bg-white shadow-[0_12px_36px_rgba(51,55,59,.12)]">
+          <div className="flex h-7 items-center gap-1.5 border-b border-black/5 bg-[#F2F2F2]/60 px-3">
+            <span className={cx(dot, "bg-[#FF5F57]")} />
+            <span className={cx(dot, "bg-[#FEBC2E]")} />
+            <span className={cx(dot, "bg-[#28C840]")} />
+            <div className="ml-5 flex-1" />
+          </div>
+          <img src={after} alt="Стало" className="block w-full object-contain" />
+        </div>
+      </div>
+    </div>
   );
 }
 
-function BenchmarkVisual() { return <div className="relative h-[380px] w-[560px]"><motion.div className="absolute left-1/2 top-[78%] h-20 w-[430px] -translate-x-1/2 rounded-[50%] bg-black/10 blur-2xl" animate={{ opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 5.6, repeat: Infinity }} /><div className="absolute left-1/2 top-12 flex -translate-x-1/2 items-center gap-4"><ScreenMock title="Было" variant="before" /><div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#FF0508] text-white shadow-[0_14px_32px_rgba(255,5,8,.22)]"><ArrowRight size={24} /></div><ScreenMock title="Стало" variant="after" delay={0.25} /></div><div className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full border border-black/5 bg-white/80 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#FF0508] shadow-sm">пилот · идёт сборка</div></div>; }
+function CaseComparisonSlide({ section }) {
+  const { before, after } = section.caseComparison;
+  return (
+    <motion.section
+      key={section.id}
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -18 }}
+      transition={{ duration: 0.34, ease: "easeOut" }}
+      className="relative z-10 mx-auto flex h-[100svh] max-h-[100svh] max-w-[1440px] flex-col gap-0 overflow-visible px-5 pb-5 pt-14 md:px-8 lg:pt-14 xl:px-10"
+    >
+      {/* Top zone: compact header */}
+      <div className="shrink-0">
+        <div className="mb-2 flex items-center gap-4">
+          <span className="rounded-full bg-[#FF0508] px-3 py-1 text-xs font-black tracking-widest text-white">{section.id}</span>
+          <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#33373B]/45">{section.eyebrow}</span>
+        </div>
+        <h1 className={cx("max-w-[700px] font-black text-[#33373B]", TITLE_STYLES[titleVariant(section)])}>{section.title}</h1>
+        <p className="mt-1 max-w-[620px] text-[clamp(14px,1.1vw,17px)] leading-[1.3] tracking-[-0.02em] text-[#33373B]/65">{section.subtitle}</p>
+        {section.points && (
+          <div className="mt-1.5 flex flex-wrap gap-1.5">
+            {section.points.map((p) => (
+              <span key={p} className="rounded-full border border-black/5 bg-white/65 px-2.5 py-0.5 text-[12px] font-medium text-[#33373B]/65">{p}</span>
+            ))}
+          </div>
+        )}
+      </div>
 
-function IterationVisual() { return <div className="relative h-[380px] w-[560px]"><motion.div className="absolute left-1/2 top-[78%] h-20 w-[430px] -translate-x-1/2 rounded-[50%] bg-black/10 blur-2xl" animate={{ opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 5.6, repeat: Infinity }} /><div className="absolute left-1/2 top-12 flex -translate-x-1/2 items-center gap-4"><ScreenMock title="Было" variant="before" /><motion.div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#FF0508] text-white shadow-[0_14px_32px_rgba(255,5,8,.22)]" initial={{ x: -8, opacity: 0.7 }} animate={{ x: [0, 8, 0], opacity: [0.82, 1, 0.82] }} transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}><ArrowRight size={24} /></motion.div><ScreenMock title="Стало" variant="after" delay={0.25} /></div><div className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full border border-black/5 bg-white/80 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#33373B]/55 shadow-sm">Orbit · несколько итераций</div></div>; }
+      {/* Main zone: case images + proof caption */}
+      <div className="flex min-h-0 flex-1 flex-col items-center justify-center py-1">
+        <CaseComparisonVisual before={before} after={after} />
+        <div className="mt-3 shrink-0">
+          {section.proof && <ProofBlock data={section.proof} />}
+        </div>
+      </div>
+    </motion.section>
+  );
+}
 
 function ServiceVisual() { return <div className="relative h-[380px] w-[500px]"><motion.div className="absolute left-[42%] top-[78%] h-20 w-[340px] -translate-x-1/2 rounded-[50%] bg-black/10 blur-2xl" animate={{ opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 5.6, repeat: Infinity }} /><Float className="absolute left-[42%] top-8 h-[286px] w-[360px] -translate-x-1/2 rounded-[32px] border border-white bg-white/92 p-5 shadow-[0_30px_70px_rgba(51,55,59,.15)]"><div className="mb-5 flex items-center justify-between"><div className="text-xs font-black uppercase tracking-[0.18em] text-[#33373B]/42">фирменный шаблон</div><div className="h-7 w-14 rounded-sm bg-[#FF0508]" /></div><div className="grid grid-cols-[1fr_72px] gap-3"><div className="space-y-3"><div className="h-10 rounded-[18px] bg-[#33373B]" /><div className="h-20 rounded-[22px] bg-[#F2F2F2]" /><div className="grid grid-cols-3 gap-2"><div className="h-16 rounded-2xl bg-[#EEE7DC]" /><div className="h-16 rounded-2xl bg-[#F2F2F2]" /><div className="h-16 rounded-2xl bg-[#FF0508]/90" /></div></div><div className="space-y-2">{[0,1,2,3].map((i) => <div key={i} className={cx("h-12 rounded-2xl border border-black/5", i === 1 ? "bg-[#FF0508]/12" : "bg-[#F2F2F2]")} />)}</div></div></Float><div className="absolute bottom-6 left-[42%] -translate-x-1/2 rounded-full border border-black/5 bg-white/80 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#33373B]/55 shadow-sm">презентация собрана в шаблоне</div></div>; }
 
@@ -643,7 +699,7 @@ function Comparison({ title, items, muted }) { return <div className={cx("rounde
 function Cards({ cards }) { return <div className="mt-4 grid max-w-[860px] gap-3 md:grid-cols-2">{cards.map(({ icon: Icon, name, text }) => <div key={name} className="rounded-[20px] border border-black/5 bg-white/60 p-3.5 shadow-sm"><Icon className="mb-2 text-[#FF0508]" size={22}/><div className="text-[17px] font-black text-[#33373B]">{name}</div><div className="mt-1 text-[14px] leading-snug text-[#33373B]/66">{text}</div></div>)}</div>; }
 function Columns({ columns }) { return <div className="mt-5 grid max-w-[860px] gap-3 md:grid-cols-2">{columns.map((col) => <div key={col.name} className="rounded-[22px] border border-black/5 bg-white/60 p-4 shadow-sm"><div className="mb-4 text-[22px] font-black leading-tight text-[#33373B]">{col.name}</div><div className="space-y-2.5">{col.items.map((item, i) => <div key={item} className="flex gap-3 text-[15px] leading-snug text-[#33373B]/72"><span className="font-black text-[#FF0508]">{String(i+1).padStart(2,"0")}</span>{item}</div>)}</div></div>)}</div>; }
 function Roadmap({ roadmap }) { return <div className="mt-5 grid max-w-[980px] gap-3 md:grid-cols-4">{roadmap.map((r) => <div key={r.period} className="rounded-[22px] border border-black/5 bg-white/60 px-4 py-4 shadow-sm"><div className="mb-3 text-[20px] font-black leading-tight text-[#FF0508]">{r.period}</div><div className="space-y-2">{r.items.map((item) => <div key={item} className="text-[14px] leading-snug text-[#33373B]/72">— {item}</div>)}</div></div>)}</div>; }
-function Slide({ section }) { return <motion.section key={section.id} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.34, ease: "easeOut" }} className="relative z-10 mx-auto grid h-[100svh] max-h-[100svh] max-w-[1440px] grid-cols-1 gap-8 overflow-visible px-5 pb-10 pt-20 md:px-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(390px,.88fr)] lg:items-center lg:pt-20 xl:px-10"><ContentBlock section={section} /><Visual type={section.visual} /></motion.section>; }
+function Slide({ section }) { return section.caseComparison ? <CaseComparisonSlide section={section} /> : <motion.section key={section.id} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.34, ease: "easeOut" }} className="relative z-10 mx-auto grid h-[100svh] max-h-[100svh] max-w-[1440px] grid-cols-1 gap-8 overflow-visible px-5 pb-10 pt-20 md:px-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(390px,.88fr)] lg:items-center lg:pt-20 xl:px-10"><ContentBlock section={section} /><Visual type={section.visual} /></motion.section>; }
 function SlideCounter({ active }) {
   return (
     <div className="pointer-events-none fixed bottom-9 right-9 z-[25] flex items-end gap-2 select-none">
