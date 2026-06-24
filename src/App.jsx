@@ -74,7 +74,13 @@ const sections = [
   {
     id: "05",
     eyebrow: "ВНУТРЕННЕЕ УСТРОЙСТВО",
-    title: "Так выглядит Sigma изнутри",
+    title: (
+      <>
+        Так выглядит
+        <br />
+        Sigma изнутри
+      </>
+    ),
     subtitle:
       "AI получает токены, правила и продуктовый контекст — не абстрактную просьбу «сделай красиво».",
     formula: "Core tokens + Product rules = управляемый AI-результат",
@@ -118,7 +124,7 @@ const sections = [
   },
   {
     id: "08",
-    eyebrow: "КЕЙС / АПРОБАЦИЯ",
+    eyebrow: "КЕЙС / ПИЛОТ",
     title: "Orbit",
     subtitle:
       "Orbit — внутренний контур управления целями, инициативами, задачами и ресурсами команды. Кейс показывает переход от Sigma Core без продуктового слоя к рабочей продуктовой модели.",
@@ -126,7 +132,7 @@ const sections = [
       "цели и ресурсы",
       "управленческий контур",
       "Sigma Core + product layer",
-      "апробация на реальном продукте",
+      "пилот на реальном продукте",
     ],
     proof: [
       { name: "Андрей Бурилов", image: "/avatars/burilov-a.png" },
@@ -175,7 +181,7 @@ const sections = [
   {
     id: "11",
     eyebrow: "РАБОЧИЙ СЦЕНАРИЙ",
-    title: "Один запрос превращается в ревью интерфейса",
+    title: "Запрос становится ревью интерфейса",
     subtitle:
       "AI получает задачу, читает правила Сигмы и продуктовый контекст, находит расхождения и отдаёт результат человеку на валидацию.",
     workflow: {
@@ -229,7 +235,7 @@ const sections = [
   {
     id: "16",
     eyebrow: "ПИЛОТ",
-    title: "Запуск пилота — в три шага",
+    title: "Запуск пилота: три шага",
     subtitle: "Если продукту нужно обновление интерфейса, быстрый прототип или переход к единым правилам — можно начать с пилота.",
     pilotSteps: [
       { title: "1. Выбрать пилотную задачу", text: "Обновление интерфейса, новый сценарий, прототип или проверка соответствия Сигме." },
@@ -251,7 +257,7 @@ const TITLE_STYLES = {
 
 function titleVariant(section) {
   if (section.id === "01") return "hero";
-  if (section.title.length > 34) return "compact";
+  if (typeof section.title === "string" && section.title.length > 34) return "compact";
   return "default";
 }
 
@@ -266,8 +272,9 @@ function Chrome({ active, setActive, presentationMode, setPresentationMode }) {
 
 function Visual({ type }) {
   const isWide = type === "codefiles";
+  const isLateSlideVisual = ["review", "roadmap", "portal"].includes(type);
   return (
-    <div className="relative hidden h-full min-h-0 w-full items-center justify-center overflow-visible pl-2 pr-12 lg:flex xl:pr-16 2xl:pr-20">
+    <div className={cx("relative hidden h-full min-h-0 w-full items-center justify-center overflow-visible pl-2 pr-12 lg:flex xl:pr-16 2xl:pr-20", isLateSlideVisual && "-translate-y-5")}>
       <div className={cx("relative flex origin-center scale-[0.9] items-center justify-center overflow-visible xl:scale-[0.94] 2xl:scale-100", isWide ? "h-[430px] w-[650px] max-w-[650px]" : "h-[400px] w-[520px] max-w-[520px]")}>
         {type === "platform" && <PlatformVisual />}
         {type === "break" && <BreakVisual />}
@@ -342,7 +349,69 @@ function PlatformVisual() {
   );
 }
 
-function BreakVisual() { return <div className="relative h-[360px] w-[560px]"><motion.div className="absolute left-1/2 top-[66%] h-20 w-[420px] -translate-x-1/2 rounded-[50%] bg-black/10 blur-2xl" animate={{ opacity: [0.45, 0.7, 0.45] }} transition={{ duration: 4.5, repeat: Infinity }} /><Float className="absolute left-12 top-20 h-60 w-56 rotate-[-9deg] rounded-[38px] bg-[linear-gradient(145deg,#ffffff,#e9e3da)] p-5 shadow-[inset_0_2px_0_rgba(255,255,255,.85),0_35px_80px_rgba(51,55,59,.18)]"><div className="mb-5 h-8 w-28 rounded-full bg-[#EEE7DC]" /><div className="space-y-3"><div className="h-4 rounded bg-black/10" /><div className="h-4 w-3/4 rounded bg-black/10" /><div className="h-24 rounded-[24px] bg-[#F2F2F2] shadow-[inset_0_1px_8px_rgba(51,55,59,.06)]" /></div></Float><Float delay={0.4} className="absolute right-12 top-28 h-60 w-56 rotate-[9deg] rounded-[38px] bg-[linear-gradient(145deg,#ffffff,#e8e8e8)] p-5 shadow-[inset_0_2px_0_rgba(255,255,255,.85),0_35px_80px_rgba(51,55,59,.18)]"><div className="mb-5 h-8 w-24 rounded-full bg-[#EEE7DC]" /><div className="space-y-3"><div className="h-4 rounded bg-black/10" /><div className="h-4 w-2/3 rounded bg-black/10" /><div className="h-24 rounded-[24px] bg-[#F2F2F2] shadow-[inset_0_1px_8px_rgba(51,55,59,.06)]" /></div></Float><motion.div className="absolute left-1/2 top-1/2 h-72 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#FF0508] shadow-[0_0_34px_rgba(255,5,8,.38)]" animate={{ scaleY: [0.72, 1, 0.72], opacity: [0.7, 1, 0.7] }} transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }} /></div>; }
+function BreakVisual() {
+  const productCard = (label, delay = 0) => (
+    <motion.div
+      className="flex h-[130px] w-[260px] flex-col rounded-[26px] border border-white bg-[linear-gradient(145deg,#ffffff,#ececec)] p-4 shadow-[0_22px_52px_rgba(51,55,59,.13)]"
+      animate={{ x: [0, 2, 0], y: [0, -2, 0] }}
+      transition={{ duration: 6.4, repeat: Infinity, ease: "easeInOut", delay }}
+    >
+      <div className="flex items-center justify-between">
+        <div className="text-[10px] font-black uppercase tracking-[0.22em] text-[#33373B]/38">{label}</div>
+        <span className="h-2.5 w-2.5 rounded-full bg-[#FF0508]/38 shadow-[0_0_10px_rgba(255,5,8,.12)]" />
+      </div>
+      <div className="mt-3 flex min-h-0 flex-1 flex-col gap-2.5">
+        <div className="h-2.5 w-[78%] rounded-full bg-neutral-200/65" />
+        <div className="h-2.5 w-[58%] rounded-full bg-neutral-200/65" />
+        <div className="h-8 w-[82%] rounded-[14px] bg-[#E8DED1]/80" />
+      </div>
+    </motion.div>
+  );
+
+  return (
+    <div className="relative h-[360px] w-[600px] overflow-visible">
+      <motion.div
+        className="absolute left-1/2 top-[74%] h-20 w-[440px] -translate-x-1/2 rounded-[50%] bg-black/10 blur-2xl"
+        animate={{ opacity: [0.36, 0.56, 0.36] }}
+        transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      <motion.div
+        className="absolute left-[10px] top-[75px] flex h-[220px] w-[230px] flex-col rounded-[34px] border border-white/70 bg-[linear-gradient(145deg,#ffffff,#e9e3da)] p-5 opacity-70 shadow-[inset_0_2px_0_rgba(255,255,255,.85),0_28px_64px_rgba(51,55,59,.12)]"
+        animate={{ y: [0, -1, 0] }}
+        transition={{ duration: 7.2, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="text-[10px] font-black uppercase tracking-[0.22em] text-[#33373B]/34">DOCS / V1</div>
+        <div className="mt-4 h-6 w-28 rounded-full bg-[#EEE7DC]" />
+        <div className="mt-4 flex min-h-0 flex-1 flex-col gap-2.5">
+          <div className="h-2.5 rounded-full bg-black/10" />
+          <div className="h-2.5 w-3/4 rounded-full bg-black/10" />
+          <div className="h-[58px] w-[86%] rounded-[18px] bg-[#F2F2F2] shadow-[inset_0_1px_8px_rgba(51,55,59,.05)]" />
+        </div>
+        <div className="mt-3 text-[11px] font-bold text-[#33373B]/24">правила зафиксированы</div>
+      </motion.div>
+
+      <div className="absolute left-[245px] top-[164px] h-12 w-[92px]">
+        <div className="absolute left-0 top-1/2 h-px w-[34px] border-t border-dashed border-[#33373B]/18" />
+        <div className="absolute right-0 top-1/2 h-px w-[34px] border-t border-dashed border-[#33373B]/18" />
+        <motion.div
+          className="absolute left-1/2 top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#FF0508]/24 bg-white text-[#FF0508] shadow-[0_10px_26px_rgba(255,5,8,.14)]"
+          animate={{ scale: [1, 1.07, 1], opacity: [0.78, 1, 0.78] }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <span className="text-[18px] font-black leading-none">×</span>
+        </motion.div>
+      </div>
+
+      <div className="absolute right-[10px] top-[42px]">
+        {productCard("PRODUCT / V3", 0.15)}
+      </div>
+      <div className="absolute right-[10px] top-[195px]">
+        {productCard("PRODUCT / V4", 0.35)}
+      </div>
+    </div>
+  );
+}
 function InsightVisual() {
   return (
     <div className="relative flex h-[420px] w-[560px] flex-col items-center justify-center overflow-visible">
@@ -577,15 +646,15 @@ function HubVisual() {
 
 function BridgeVisual() {
   const nodes = [
-    { title: "Новый продукт", lines: ["Sigma Core", "UI Framework", "md-слой"] },
-    { title: "Существующий", lines: ["адаптация", "product rules", "AI review"] },
+    { title: "Новый продукт", lines: ["единая база", "UI Framework", "контекст сразу"] },
+    { title: "Существующий продукт", lines: ["карта текущего UI", "product rules", "AI review"] },
   ];
   return (
     <div className="relative flex h-[390px] w-[560px] flex-col items-center justify-center overflow-visible">
       <motion.div className="absolute left-1/2 top-[76%] h-20 w-[420px] -translate-x-1/2 rounded-[50%] bg-black/[0.07] blur-2xl" animate={{ opacity: [0.3, 0.48, 0.3], scale: [0.96, 1.02, 0.96] }} transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }} />
-      <div className="relative z-10 grid w-[520px] grid-cols-[1fr_68px_1fr] items-center gap-5">
+      <div className="relative z-10 grid w-[520px] grid-cols-2 items-center gap-6">
         {nodes.map((node, i) => (
-          <Float key={node.title} delay={i * 0.35} className={cx("h-[250px] rounded-[30px] border border-white/90 bg-white/88 p-5 shadow-[0_28px_62px_rgba(51,55,59,.13)]", i === 1 && "col-start-3")}>
+          <Float key={node.title} delay={i * 0.35} className="h-[250px] rounded-[30px] border border-white/90 bg-white/88 p-5 shadow-[0_28px_62px_rgba(51,55,59,.13)]">
             <div className="mb-5 flex items-center justify-between">
               <div className="text-[13px] font-black uppercase tracking-[0.12em] text-[#33373B]/45">{node.title}</div>
               <span className={cx("h-4 w-4 rounded-full", i === 0 ? "bg-[#33373B]" : "bg-[#FF0508]")} />
@@ -600,9 +669,6 @@ function BridgeVisual() {
             </div>
           </Float>
         ))}
-        <motion.div className="col-start-2 row-start-1 flex h-14 w-14 items-center justify-center justify-self-center rounded-full bg-[#FF0508] text-white shadow-[0_16px_34px_rgba(255,5,8,.22)]" animate={{ x: [-4, 4, -4] }} transition={{ duration: 4.6, repeat: Infinity, ease: "easeInOut" }}>
-          <ArrowRight size={26} />
-        </motion.div>
       </div>
     </div>
   );
@@ -668,28 +734,30 @@ function CaseComparisonSlide({ section }) {
       className="relative z-10 mx-auto flex h-[100svh] max-h-[100svh] max-w-[1440px] flex-col gap-0 overflow-visible px-5 pb-5 pt-14 md:px-8 lg:pt-14 xl:px-10"
     >
       {/* Top zone: compact header */}
-      <div className="shrink-0">
-        <div className="mb-2 flex items-center gap-4">
-          <span className="rounded-full bg-[#FF0508] px-3 py-1 text-xs font-black tracking-widest text-white">{section.id}</span>
-          <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#33373B]/45">{section.eyebrow}</span>
-        </div>
-        <h1 className={cx("max-w-[700px] font-black text-[#33373B]", TITLE_STYLES[titleVariant(section)])}>{section.title}</h1>
-        <p className="mt-1 max-w-[620px] text-[clamp(14px,1.1vw,17px)] leading-[1.3] tracking-[-0.02em] text-[#33373B]/65">{section.subtitle}</p>
-        {section.points && (
-          <div className="mt-1.5 flex flex-wrap gap-1.5">
-            {section.points.map((p) => (
-              <span key={p} className="rounded-full border border-black/5 bg-white/65 px-2.5 py-0.5 text-[12px] font-medium text-[#33373B]/65">{p}</span>
-            ))}
+      <div className="grid shrink-0 gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
+        <div>
+          <div className="mb-2 flex items-center gap-4">
+            <span className="rounded-full bg-[#FF0508] px-3 py-1 text-xs font-black tracking-widest text-white">{section.id}</span>
+            <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#33373B]/45">{section.eyebrow}</span>
           </div>
+          <h1 className={cx("max-w-[700px] font-black text-[#33373B]", TITLE_STYLES[titleVariant(section)])}>{section.title}</h1>
+          <p className="mt-1 max-w-[620px] text-[clamp(14px,1.1vw,17px)] leading-[1.3] tracking-[-0.02em] text-[#33373B]/65">{section.subtitle}</p>
+          {section.points && (
+            <div className="mt-1.5 flex flex-wrap gap-1.5">
+              {section.points.map((p) => (
+                <span key={p} className="rounded-full border border-black/5 bg-white/65 px-2.5 py-0.5 text-[12px] font-medium text-[#33373B]/65">{p}</span>
+              ))}
+            </div>
+          )}
+        </div>
+        {section.proof && (
+          <ProofBlock data={section.proof} className="mt-0 justify-start pt-6 lg:justify-end" />
         )}
       </div>
 
       {/* Main zone: case images + proof caption */}
       <div className="flex min-h-0 flex-1 flex-col items-center justify-center py-1">
         <CaseComparisonVisual before={before} after={after} />
-        <div className="mt-3 shrink-0">
-          {section.proof && <ProofBlock data={section.proof} />}
-        </div>
       </div>
     </motion.section>
   );
@@ -785,9 +853,9 @@ function ContentBlock({ section }) {
   const titleClass = TITLE_STYLES[titleVariant(section)];
   return <div className="flex h-full min-h-0 flex-col justify-center overflow-visible"><div className="mb-5 flex items-center gap-4"><span className="rounded-full bg-[#FF0508] px-3 py-1 text-xs font-black tracking-widest text-white">{section.id}</span><span className="text-xs font-bold uppercase tracking-[0.22em] text-[#33373B]/45">{section.eyebrow}</span></div><h1 className={cx("max-w-[780px] font-black text-[#33373B]", titleClass)}>{section.title}</h1><p className="mt-4 max-w-[700px] text-[clamp(17px,1.45vw,20px)] leading-[1.3] tracking-[-0.02em] text-[#33373B]/72">{section.subtitle}</p>{section.formula && <div className="mt-7 max-w-[620px] rounded-[28px] border border-black/5 bg-white/70 p-5 text-lg font-bold leading-tight text-[#33373B] shadow-sm">{section.formula}</div>}{section.points && <div className="mt-5 grid max-w-[780px] gap-3 md:grid-cols-2">{section.points.map((p) => <div key={p} className="flex items-start gap-3 rounded-2xl border border-black/5 bg-white/55 p-3 text-[15px] font-medium text-[#33373B]/80"><span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FF0508] text-white"><Check size={14}/></span><span>{p}</span></div>)}</div>}{section.proof && <ProofBlock data={section.proof} />}{section.beforeAfter && <BeforeAfter data={section.beforeAfter} />}{section.cards && <Cards cards={section.cards} />}{section.columns && <Columns columns={section.columns} />}{section.roadmap && <Roadmap roadmap={section.roadmap} />}{section.workflow && <Workflow data={section.workflow} />}{section.problemCards && <ProblemInsight section={section} />}{section.pilotSteps && <PilotSteps section={section} />}</div>;
 }
-function ProofBlock({ data }) {
+function ProofBlock({ data, className = "mt-7" }) {
   const items = Array.isArray(data) ? data : [data];
-  return <div className="mt-7 flex flex-wrap items-center gap-3">{
+  return <div className={cx("flex flex-wrap items-center gap-3", className)}>{
     items.map((p) => <div key={p.name} className="flex items-center gap-3 rounded-full border border-black/5 bg-white/70 px-4 py-2 shadow-sm"><img src={p.image} alt="" className="h-10 w-10 rounded-full object-cover ring-1 ring-black/5" /><div><div className="text-sm font-bold text-[#33373B]">{p.name}</div></div></div>)
   }</div>;
 }
