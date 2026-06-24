@@ -47,16 +47,16 @@ const sections = [
     eyebrow: "ИТОГ ПРОБЛЕМЫ",
     title: "Когда правила живут отдельно",
     subtitle:
-      "Система может работать, но эффект теряется, когда правила, контекст продукта и документация живут в разных местах.",
+      "Эффект дизайн-системы теряется, когда правила, контекст и реализация живут в разных местах.",
     problemCards: [
-      { title: "Правила отдельно", text: "Компоненты, гайды, макеты и фронт требуют ручного перевода." },
-      { title: "Контекст теряется", text: "Общие правила ДС не учитывают специфику продукта." },
-      { title: "Документация догоняет", text: "Правила обновляются медленнее продуктовых задач." },
+      { title: "Правила отдельно", text: "Дизайн, фронт и гайды требуют ручного перевода." },
+      { title: "Контекст теряется", text: "Общие правила не знают специфику продукта." },
+      { title: "Документация догоняет", text: "Продукт меняется быстрее, чем обновляются правила." },
     ],
     conclusion:
-      "Ценность дизайн-системы ограничена, если правила каждый раз нужно заново объяснять и собирать вручную.",
+      "Систему приходится каждый раз объяснять заново.",
     callout:
-      "Задача Сигмы — стать машинно-читаемым стандартом для проектирования, проверки и интеграции.",
+      "Следующий шаг — сделать Sigma машинно-читаемым стандартом.",
     visual: "insight",
   },
   {
@@ -183,9 +183,9 @@ const sections = [
     eyebrow: "РАБОЧИЙ СЦЕНАРИЙ",
     title: "Запрос становится ревью интерфейса",
     subtitle:
-      "AI получает задачу, читает правила Сигмы и продуктовый контекст, находит расхождения и отдаёт результат человеку на валидацию.",
+      "AI получает задачу, читает правила Sigma и продуктовый контекст, находит расхождения и отдаёт результат человеку на валидацию.",
     workflow: {
-      request: "Проверь экран заявки на соответствие Сигме",
+      request: "Проверь экран заявки на соответствие Sigma",
       reads: ["Sigma Core", "Product Layer", "правила компонентов", "контекст продукта"],
       output: ["найдены расхождения с правилами", "предложение исправлений", "черновик документации", "решение остаётся за человеком"],
     },
@@ -238,7 +238,7 @@ const sections = [
     title: "Запуск пилота: три шага",
     subtitle: "Если продукту нужно обновление интерфейса, быстрый прототип или переход к единым правилам — можно начать с пилота.",
     pilotSteps: [
-      { title: "1. Выбрать пилотную задачу", text: "Обновление интерфейса, новый сценарий, прототип или проверка соответствия Сигме." },
+      { title: "1. Выбрать пилотную задачу", text: "Обновление интерфейса, новый сценарий, прототип или проверка соответствия Sigma." },
       { title: "2. Описать продуктовый слой", text: "Кто пользователь, какой сценарий, какие ограничения и чем продукт отличается." },
       { title: "3. Проверить результат", text: "Смотрим прототип, ревью, документацию и применимость для фронта." },
     ],
@@ -676,7 +676,70 @@ function BridgeVisual() {
 
 function ReviewVisual() { return <div className="relative h-[360px] w-[520px] overflow-visible"><motion.div className="absolute left-1/2 top-[74%] h-20 w-[350px] -translate-x-1/2 rounded-[50%] bg-black/10 blur-2xl" animate={{ opacity: [0.34, 0.54, 0.34] }} transition={{ duration: 5.5, repeat: Infinity }} /><Float className="absolute left-1/2 top-7 h-64 w-[320px] -translate-x-1/2 rounded-[34px] bg-[linear-gradient(145deg,#ffffff,#e9e3da)] p-5 shadow-[0_30px_70px_rgba(51,55,59,.17)]"><div className="mb-5 flex gap-2"><div className="h-3 w-3 rounded-full bg-[#FF0508]"/><div className="h-3 w-3 rounded-full bg-black/10"/><div className="h-3 w-3 rounded-full bg-black/10"/></div><div className="grid grid-cols-2 gap-4"><div className="h-36 rounded-[24px] bg-[#EEE7DC]" /><div className="space-y-3"><div className="h-5 rounded bg-black/10"/><div className="h-5 rounded bg-black/10"/><div className="h-16 rounded-[18px] border border-black/5 bg-[#F2F2F2]"/></div></div></Float><motion.div className="absolute bottom-9 right-16 flex h-20 w-20 items-center justify-center rounded-full bg-[#FF0508] text-white shadow-[0_22px_60px_rgba(255,5,8,.28)]" animate={{ scale: [1, 1.06, 1] }} transition={{ duration: 3, repeat: Infinity }}><Check size={40}/></motion.div></div>; }
 function RoadmapVisual() { return <div className="relative h-[360px] w-[540px]"><motion.div className="absolute left-1/2 top-[72%] h-20 w-[410px] -translate-x-1/2 rounded-[50%] bg-black/10 blur-2xl" animate={{ opacity: [0.34, 0.54, 0.34] }} transition={{ duration: 6, repeat: Infinity }} /><div className="absolute left-12 top-[170px] h-3 w-[430px] rounded-full bg-[#33373B]/12" /><motion.div className="absolute left-12 top-[170px] h-3 w-[430px] origin-left rounded-full bg-[#FF0508] shadow-[0_12px_34px_rgba(255,5,8,.18)]" animate={{ scaleX: [0.12, 1, 0.12] }} transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut" }} />{[{ p: "Q3", label: "пилоты", c: "left-4 top-[114px]" },{ p: "Q4", label: "документация", c: "left-[204px] top-[80px]" },{ p: "2027", label: "масштаб", c: "right-4 top-[114px]" }].map((item, i) => <Float key={item.p} delay={i * 0.5} className={cx("absolute flex h-[120px] w-36 flex-col items-center justify-center rounded-[28px] bg-[linear-gradient(145deg,#ffffff,#e9e3da)] px-4 text-center shadow-[0_28px_62px_rgba(51,55,59,.15)]", item.c)}><div className="text-2xl font-black text-[#33373B]">{item.p}</div><div className="mt-2 text-[11px] font-black uppercase leading-tight tracking-[0.08em] text-[#FF0508]">{item.label}</div></Float>)}</div>; }
-function PortalVisual() { return <div className="relative h-[380px] w-[560px]"><motion.div className="absolute left-1/2 top-[70%] h-24 w-[410px] -translate-x-1/2 rounded-[50%] bg-black/10 blur-2xl" animate={{ scale: [0.95, 1.04, 0.95], opacity: [0.42, 0.62, 0.42] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} /><motion.div className="absolute left-1/2 top-[46%] flex h-72 w-72 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[64px] border-[18px] border-[#FF0508] bg-white/20 shadow-[0_30px_80px_rgba(255,5,8,.14)]" animate={{ y: [0, -8, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}><div className="h-40 w-52 rounded-[34px] bg-[linear-gradient(145deg,#ffffff,#e9e3da)] p-5 shadow-[inset_0_2px_0_rgba(255,255,255,.85),0_28px_58px_rgba(51,55,59,.13)]"><div className="mb-4 flex items-center gap-3"><span className="h-4 w-4 rounded-full bg-[#FF0508]" /><div className="h-4 flex-1 rounded bg-[#EEE7DC]" /></div><div className="h-16 rounded-[22px] bg-[#F2F2F2] shadow-[inset_0_1px_8px_rgba(51,55,59,.06)]" /></div></motion.div><div className="absolute bottom-12 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full bg-[#33373B] px-6 py-3 text-sm font-bold text-white shadow-[0_16px_34px_rgba(51,55,59,.16)]"><span className="h-2.5 w-2.5 rounded-full bg-[#FF0508]" />пилот готов к запуску</div></div>; }
+function PortalVisual() {
+  const steps = [
+    { num: "01", label: "задача", hint: "выбрать пилотную" },
+    { num: "02", label: "product layer", hint: "описать контекст" },
+    { num: "03", label: "проверка", hint: "ревью и docs" },
+  ];
+  return (
+    <div className="relative flex h-[380px] w-[560px] items-center justify-center overflow-visible">
+      <motion.div
+        className="absolute left-1/2 top-[80%] h-20 w-[440px] -translate-x-1/2 rounded-[50%] bg-black/10 blur-2xl"
+        animate={{ opacity: [0.34, 0.54, 0.34] }}
+        transition={{ duration: 5.4, repeat: Infinity }}
+      />
+
+      <div className="flex flex-col items-center gap-0">
+        {steps.flatMap((step, i) => [
+          /* Connector between cards */
+          i > 0 && (
+            <div key={`conn-${i}`} className="flex justify-center py-[2px]">
+              <div className="h-3 w-px bg-[#33373B]/10" />
+            </div>
+          ),
+          /* Step card */
+          <motion.div
+            key={step.num}
+            className="flex w-[310px] items-center gap-5 rounded-[20px] border border-white/80 bg-white/90 px-5 py-4 shadow-[0_14px_32px_rgba(51,55,59,.1)]"
+            initial={{ y: -4, opacity: 0.6 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 2.4, delay: i * 0.5 }}
+          >
+            <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#33373B] text-[15px] font-black text-white">
+              {step.num}
+            </div>
+            <div>
+              <div className="text-[14px] font-black uppercase tracking-[0.08em] text-[#FF0508]">{step.label}</div>
+              <div className="text-[13px] font-medium text-[#33373B]/50">{step.hint}</div>
+            </div>
+          </motion.div>
+        ])}
+
+        {/* Connector to badge */}
+        <div className="flex justify-center py-[2px]">
+          <div className="h-3 w-px bg-[#33373B]/10" />
+        </div>
+
+        {/* Final result badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 2.2, delay: 2.2 }}
+        >
+          <div className="flex w-[310px] items-center justify-center gap-2.5 rounded-full bg-[#33373B] px-5 py-3 shadow-[0_14px_32px_rgba(51,55,59,.16)]">
+            <motion.span
+              className="h-2.5 w-2.5 rounded-full bg-[#FF0508] shrink-0"
+              animate={{ scale: [1, 1.18, 1], opacity: [0.72, 1, 0.72] }}
+              transition={{ duration: 2.2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+            />
+            <span className="text-[14px] font-bold text-white">пилот готов к запуску</span>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
 
 function CaseComparisonVisual({ before, after }) {
   const dot = "h-2.5 w-2.5 rounded-full";
@@ -731,7 +794,7 @@ function CaseComparisonSlide({ section }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -18 }}
       transition={{ duration: 0.34, ease: "easeOut" }}
-      className="relative z-10 mx-auto flex h-[100svh] max-h-[100svh] max-w-[1440px] flex-col gap-0 overflow-visible px-5 pb-5 pt-14 md:px-8 lg:pt-14 xl:px-10"
+      className="relative z-10 mx-auto flex h-[100svh] max-h-[100svh] max-w-[1440px] flex-col gap-0 overflow-visible px-5 pb-5 pt-[92px] md:px-8 lg:pt-[92px] xl:px-10"
     >
       {/* Top zone: compact header */}
       <div className="grid shrink-0 gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
@@ -756,7 +819,7 @@ function CaseComparisonSlide({ section }) {
       </div>
 
       {/* Main zone: case images + proof caption */}
-      <div className="flex min-h-0 flex-1 flex-col items-center justify-center py-1">
+      <div className="flex min-h-0 flex-1 flex-col items-center justify-start pt-0">
         <CaseComparisonVisual before={before} after={after} />
       </div>
     </motion.section>
@@ -851,7 +914,7 @@ function ServiceVisual() { return <div className="relative h-[380px] w-[500px]">
 
 function ContentBlock({ section }) {
   const titleClass = TITLE_STYLES[titleVariant(section)];
-  return <div className="flex h-full min-h-0 flex-col justify-center overflow-visible"><div className="mb-5 flex items-center gap-4"><span className="rounded-full bg-[#FF0508] px-3 py-1 text-xs font-black tracking-widest text-white">{section.id}</span><span className="text-xs font-bold uppercase tracking-[0.22em] text-[#33373B]/45">{section.eyebrow}</span></div><h1 className={cx("max-w-[780px] font-black text-[#33373B]", titleClass)}>{section.title}</h1><p className="mt-4 max-w-[700px] text-[clamp(17px,1.45vw,20px)] leading-[1.3] tracking-[-0.02em] text-[#33373B]/72">{section.subtitle}</p>{section.formula && <div className="mt-7 max-w-[620px] rounded-[28px] border border-black/5 bg-white/70 p-5 text-lg font-bold leading-tight text-[#33373B] shadow-sm">{section.formula}</div>}{section.points && <div className="mt-5 grid max-w-[780px] gap-3 md:grid-cols-2">{section.points.map((p) => <div key={p} className="flex items-start gap-3 rounded-2xl border border-black/5 bg-white/55 p-3 text-[15px] font-medium text-[#33373B]/80"><span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FF0508] text-white"><Check size={14}/></span><span>{p}</span></div>)}</div>}{section.proof && <ProofBlock data={section.proof} />}{section.beforeAfter && <BeforeAfter data={section.beforeAfter} />}{section.cards && <Cards cards={section.cards} />}{section.columns && <Columns columns={section.columns} />}{section.roadmap && <Roadmap roadmap={section.roadmap} />}{section.workflow && <Workflow data={section.workflow} />}{section.problemCards && <ProblemInsight section={section} />}{section.pilotSteps && <PilotSteps section={section} />}</div>;
+  return <div className="flex h-full min-h-0 flex-col justify-center overflow-visible"><div className="mb-5 flex items-center gap-4"><span className="rounded-full bg-[#FF0508] px-3 py-1 text-xs font-black tracking-widest text-white">{section.id}</span><span className="text-xs font-bold uppercase tracking-[0.22em] text-[#33373B]/45">{section.eyebrow}</span></div><h1 className={cx("max-w-[780px] font-black text-[#33373B]", titleClass)}>{section.title}</h1><p className="mt-4 max-w-[700px] text-[clamp(17px,1.45vw,20px)] leading-[1.3] tracking-[-0.02em] text-[#33373B]/72">{section.subtitle}</p>{section.formula && <div className="mt-7 max-w-[620px] rounded-[28px] border border-black/5 bg-white/70 p-5 text-lg font-bold leading-tight text-[#33373B] shadow-sm">{section.formula}</div>}{section.points && <div className="mt-5 grid max-w-[780px] gap-3 md:grid-cols-2">{section.points.map((p) => <div key={p} className="flex items-start gap-3 rounded-2xl border border-black/5 bg-white/55 p-3 text-[15px] font-medium text-[#33373B]/80"><span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FF0508] text-white"><Check size={14}/></span><span>{p}</span></div>)}</div>}{section.beforeAfter && <BeforeAfter data={section.beforeAfter} />}{section.cards && <Cards cards={section.cards} />}{section.columns && <Columns columns={section.columns} />}{section.roadmap && <Roadmap roadmap={section.roadmap} />}{section.workflow && <Workflow data={section.workflow} />}{section.problemCards && <ProblemInsight section={section} />}{section.pilotSteps && <PilotSteps section={section} />}</div>;
 }
 function ProofBlock({ data, className = "mt-7" }) {
   const items = Array.isArray(data) ? data : [data];
@@ -867,7 +930,7 @@ function Comparison({ title, items, muted }) { return <div className={cx("rounde
 function Cards({ cards }) { return <div className="mt-4 grid max-w-[860px] gap-3 md:grid-cols-2">{cards.map(({ icon: Icon, name, text }) => <div key={name} className="rounded-[20px] border border-black/5 bg-white/60 p-3.5 shadow-sm"><Icon className="mb-2 text-[#FF0508]" size={22}/><div className="text-[17px] font-black text-[#33373B]">{name}</div><div className="mt-1 text-[14px] leading-snug text-[#33373B]/66">{text}</div></div>)}</div>; }
 function Columns({ columns }) { return <div className="mt-5 grid max-w-[860px] gap-3 md:grid-cols-2">{columns.map((col) => <div key={col.name} className="rounded-[22px] border border-black/5 bg-white/60 p-4 shadow-sm"><div className="mb-4 text-[22px] font-black leading-tight text-[#33373B]">{col.name}</div><div className="space-y-2.5">{col.items.map((item, i) => <div key={item} className="flex gap-3 text-[15px] leading-snug text-[#33373B]/72"><span className="font-black text-[#FF0508]">{String(i+1).padStart(2,"0")}</span>{item}</div>)}</div></div>)}</div>; }
 function Roadmap({ roadmap }) { return <div className="mt-5 grid max-w-[980px] gap-3 md:grid-cols-4">{roadmap.map((r) => <div key={r.period} className="rounded-[22px] border border-black/5 bg-white/60 px-4 py-4 shadow-sm"><div className="mb-3 text-[20px] font-black leading-tight text-[#FF0508]">{r.period}</div><div className="space-y-2">{r.items.map((item) => <div key={item} className="text-[14px] leading-snug text-[#33373B]/72">— {item}</div>)}</div></div>)}</div>; }
-function Slide({ section }) { return section.caseComparison ? <CaseComparisonSlide section={section} /> : section.visual === "mockup" ? <CommunicationCaseSlide section={section} /> : <motion.section key={section.id} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.34, ease: "easeOut" }} className="relative z-10 mx-auto grid h-[100svh] max-h-[100svh] max-w-[1440px] grid-cols-1 gap-8 overflow-visible px-5 pb-10 pt-20 md:px-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(390px,.88fr)] lg:items-center lg:pt-20 xl:px-10"><ContentBlock section={section} /><Visual type={section.visual} /></motion.section>; }
+function Slide({ section }) { return section.caseComparison ? <CaseComparisonSlide section={section} /> : section.visual === "mockup" ? <CommunicationCaseSlide section={section} /> : <motion.section key={section.id} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.34, ease: "easeOut" }} className="relative z-10 mx-auto grid h-[100svh] max-h-[100svh] max-w-[1440px] grid-cols-1 gap-8 overflow-visible px-5 pb-10 pt-20 md:px-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(390px,.88fr)] lg:items-center lg:pt-20 xl:px-10"><ContentBlock section={section} /><div className="flex flex-col">{section.proof && <ProofBlock data={section.proof} className="mb-3 justify-end" />}<Visual type={section.visual} /></div></motion.section>; }
 function SlideCounter({ active }) {
   return (
     <div className="pointer-events-none fixed bottom-9 right-9 z-[25] flex items-end gap-2 select-none">
