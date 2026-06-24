@@ -21,6 +21,21 @@ const ACCESS_PASSWORD = "0406";
 const sections = [
   {
     id: "01",
+    eyebrow: "ПЛАН ВСТРЕЧИ",
+    title: "Что сегодня покажем",
+    subtitle:
+      "Коротко пройдём путь от правил Sigma к AI-инструментам, кейсам и пилоту.",
+    agenda: [
+      { name: "Василий Акулов", role: "вводная", image: "/avatars/akulov-v.png", text: "Зачем дизайн-системе нужен AI Native-подход" },
+      { name: "Игорь Семёнов", role: "подход и кейсы", image: "/avatars/semenov-i.png", text: "Как Sigma становится рабочим стандартом для продуктов" },
+      { name: "Владислав Асламов", role: "AI skills", image: "/avatars/aslamov-v.png", text: "Как подключить правила Sigma к AI-инструментам" },
+      { name: "Андрей Миренков", role: "UI Framework", image: "/avatars/mirenkov-a.png", text: "Почему framework остаётся важной частью системы" },
+      { name: "Константин Афанасьев", role: "документация", image: "/avatars/afanasyev-k.png", text: "Как правила и токены становятся машинно-читаемым контекстом" },
+    ],
+    visual: "agenda",
+  },
+  {
+    id: "02",
     eyebrow: "СИГМА · AI NATIVE",
     title: "Sigma AI Native",
     subtitle: "Как дизайн-система становится рабочим стандартом для продуктов",
@@ -29,7 +44,7 @@ const sections = [
     visual: "platform",
   },
   {
-    id: "02",
+    id: "03",
     eyebrow: "ПРОБЛЕМА",
     title: "Документация больше не успевает за продуктами",
     subtitle:
@@ -43,7 +58,7 @@ const sections = [
     visual: "break",
   },
   {
-    id: "03",
+    id: "04",
     eyebrow: "ИТОГ ПРОБЛЕМЫ",
     title: "Когда правила живут отдельно",
     subtitle:
@@ -60,7 +75,7 @@ const sections = [
     visual: "insight",
   },
   {
-    id: "04",
+    id: "05",
     eyebrow: "СДВИГ",
     title: "Sigma становится языком, который понимает AI",
     subtitle:
@@ -72,7 +87,7 @@ const sections = [
     visual: "transform",
   },
   {
-    id: "05",
+    id: "06",
     eyebrow: "ВНУТРЕННЕЕ УСТРОЙСТВО",
     title: (
       <>
@@ -87,7 +102,7 @@ const sections = [
     visual: "codefiles",
   },
   {
-    id: "06",
+    id: "07",
     eyebrow: "АРХИТЕКТУРА",
     title: "Sigma Core → Product Layer → AI Skills → Проверяемый UI",
     subtitle:
@@ -101,7 +116,7 @@ const sections = [
     visual: "stack",
   },
   {
-    id: "07",
+    id: "08",
     eyebrow: "КЕЙС / БЕНЧМАРК",
     title: "Process Garden / MPG",
     subtitle:
@@ -123,7 +138,7 @@ const sections = [
     visual: "case-comparison",
   },
   {
-    id: "08",
+    id: "09",
     eyebrow: "КЕЙС / ПИЛОТ",
     title: "Orbit",
     subtitle:
@@ -137,6 +152,7 @@ const sections = [
     proof: [
       { name: "Андрей Бурилов", image: "/avatars/burilov-a.png" },
       { name: "Алексей Яковенко", image: "/avatars/yakovenko-a.png" },
+      { name: "Владимир Суровцев", image: "/avatars/surovtsev-v.png" },
     ],
     caseComparison: {
       before: "/cases/orbit-before.png",
@@ -145,7 +161,7 @@ const sections = [
     visual: "case-comparison",
   },
   {
-    id: "09",
+    id: "10",
     eyebrow: "КЕЙС / ВНУТРЕННИЕ СЕРВИСЫ",
     title: "Развитие внутренних сервисов",
     subtitle:
@@ -163,7 +179,7 @@ const sections = [
     visual: "service",
   },
   {
-    id: "10",
+    id: "11",
     eyebrow: "КЕЙС / КОММУНИКАЦИИ",
     title: "По тем же правилам собирается email-дайджест",
     subtitle:
@@ -179,7 +195,7 @@ const sections = [
     visual: "mockup",
   },
   {
-    id: "11",
+    id: "12",
     eyebrow: "РАБОЧИЙ СЦЕНАРИЙ",
     title: "Запрос становится ревью интерфейса",
     subtitle:
@@ -192,7 +208,7 @@ const sections = [
     visual: "case",
   },
   {
-    id: "12",
+    id: "13",
     eyebrow: "ОПЕРАЦИОННАЯ МОДЕЛЬ",
     title: "AI берёт на себя рутину, человек — решение",
     subtitle: "AI не отдельная фича, а способ сократить ручную работу и держать качество.",
@@ -200,7 +216,7 @@ const sections = [
     visual: "hub",
   },
   {
-    id: "13",
+    id: "14",
     eyebrow: "ПОДКЛЮЧЕНИЕ ПРОДУКТОВ",
     title: "Два сценария подключения продуктов",
     subtitle:
@@ -212,7 +228,7 @@ const sections = [
     visual: "bridge",
   },
   {
-    id: "14",
+    id: "15",
     eyebrow: "ЦЕННОСТЬ ДЛЯ КОМАНДЫ",
     title: "Что получает продуктовая команда",
     subtitle: "Не просто библиотеку, а понятный способ быстрее двигаться к единому интерфейсу.",
@@ -220,7 +236,7 @@ const sections = [
     visual: "review",
   },
   {
-    id: "15",
+    id: "16",
     eyebrow: "ROADMAP",
     title: "Пилоты и постепенное масштабирование",
     subtitle: "Запускаем подход через фокусные сценарии, проверяем эффект и расширяем библиотеку skills.",
@@ -233,7 +249,7 @@ const sections = [
     visual: "roadmap",
   },
   {
-    id: "16",
+    id: "17",
     eyebrow: "ПИЛОТ",
     title: "Запуск пилота: три шага",
     subtitle: "Если продукту нужно обновление интерфейса, быстрый прототип или переход к единым правилам — можно начать с пилота.",
@@ -289,6 +305,7 @@ function Visual({ type }) {
         {type === "insight" && <InsightVisual />}
         {type === "codefiles" && <CodeFilesVisual />}
         {type === "service" && <ServiceVisual />}
+        {type === "agenda" && <AgendaVisual />}
       </div>
     </div>
   );
@@ -910,11 +927,66 @@ function CommunicationCaseSlide({ section }) {
   );
 }
 
+function AgendaVisual() {
+  const items = [
+    { name: "Василий Акулов", role: "вводная", image: "/avatars/akulov-v.png", text: "Зачем дизайн-системе нужен AI Native-подход" },
+    { name: "Игорь Семёнов", role: "подход и кейсы", image: "/avatars/semenov-i.png", text: "Как Sigma становится рабочим стандартом для продуктов" },
+    { name: "Владислав Асламов", role: "AI skills", image: "/avatars/aslamov-v.png", text: "Как подключить правила Sigma к AI-инструментам" },
+    { name: "Андрей Миренков", role: "UI Framework", image: "/avatars/mirenkov-a.png", text: "Почему framework остаётся важной частью системы" },
+    { name: "Константин Афанасьев", role: "документация", image: "/avatars/afanasyev-k.png", text: "Как правила и токены становятся машинно-читаемым контекстом" },
+  ];
+  return (
+    <div className="flex h-[420px] w-[540px] items-center justify-center overflow-visible">
+      <div className="flex w-full max-w-[500px] flex-col gap-2.5">
+        {items.map((item, i) => (
+          <div key={item.name} className="flex items-center gap-3 rounded-[18px] border border-white/80 bg-white/90 px-4 py-3 shadow-[0_10px_24px_rgba(51,55,59,.08)]">
+            <img src={item.image} alt="" className="h-9 w-9 shrink-0 rounded-full object-cover ring-1 ring-black/5" />
+            <div className="min-w-0 flex-1">
+              <div className="flex items-baseline gap-2">
+                <span className="text-[14px] font-black leading-tight text-[#33373B]">{item.name}</span>
+                <span className="text-[11px] font-medium text-[#FF0508]">{item.role}</span>
+              </div>
+              <div className="mt-0.5 text-[12px] leading-snug text-[#33373B]/55">{item.text}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ServiceVisual() { return <div className="relative h-[380px] w-[500px]"><motion.div className="absolute left-[42%] top-[78%] h-20 w-[340px] -translate-x-1/2 rounded-[50%] bg-black/10 blur-2xl" animate={{ opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 5.6, repeat: Infinity }} /><Float className="absolute left-[42%] top-8 h-[286px] w-[360px] -translate-x-1/2 rounded-[32px] border border-white bg-white/92 p-5 shadow-[0_30px_70px_rgba(51,55,59,.15)]"><div className="mb-5 flex items-center justify-between"><div className="text-xs font-black uppercase tracking-[0.18em] text-[#33373B]/42">фирменный шаблон</div><div className="h-7 w-14 rounded-sm bg-[#FF0508]" /></div><div className="grid grid-cols-[1fr_72px] gap-3"><div className="space-y-3"><div className="h-10 rounded-[18px] bg-[#33373B]" /><div className="h-20 rounded-[22px] bg-[#F2F2F2]" /><div className="grid grid-cols-3 gap-2"><div className="h-16 rounded-2xl bg-[#EEE7DC]" /><div className="h-16 rounded-2xl bg-[#F2F2F2]" /><div className="h-16 rounded-2xl bg-[#FF0508]/90" /></div></div><div className="space-y-2">{[0,1,2,3].map((i) => <div key={i} className={cx("h-12 rounded-2xl border border-black/5", i === 1 ? "bg-[#FF0508]/12" : "bg-[#F2F2F2]")} />)}</div></div></Float><div className="absolute bottom-6 left-[42%] -translate-x-1/2 rounded-full border border-black/5 bg-white/80 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#33373B]/55 shadow-sm">презентация собрана в шаблоне</div></div>; }
 
 function ContentBlock({ section }) {
   const titleClass = TITLE_STYLES[titleVariant(section)];
-  return <div className="flex h-full min-h-0 flex-col justify-center overflow-visible"><div className="mb-5 flex items-center gap-4"><span className="rounded-full bg-[#FF0508] px-3 py-1 text-xs font-black tracking-widest text-white">{section.id}</span><span className="text-xs font-bold uppercase tracking-[0.22em] text-[#33373B]/45">{section.eyebrow}</span></div><h1 className={cx("max-w-[780px] font-black text-[#33373B]", titleClass)}>{section.title}</h1><p className="mt-4 max-w-[700px] text-[clamp(17px,1.45vw,20px)] leading-[1.3] tracking-[-0.02em] text-[#33373B]/72">{section.subtitle}</p>{section.formula && <div className="mt-7 max-w-[620px] rounded-[28px] border border-black/5 bg-white/70 p-5 text-lg font-bold leading-tight text-[#33373B] shadow-sm">{section.formula}</div>}{section.points && <div className="mt-5 grid max-w-[780px] gap-3 md:grid-cols-2">{section.points.map((p) => <div key={p} className="flex items-start gap-3 rounded-2xl border border-black/5 bg-white/55 p-3 text-[15px] font-medium text-[#33373B]/80"><span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FF0508] text-white"><Check size={14}/></span><span>{p}</span></div>)}</div>}{section.beforeAfter && <BeforeAfter data={section.beforeAfter} />}{section.cards && <Cards cards={section.cards} />}{section.columns && <Columns columns={section.columns} />}{section.roadmap && <Roadmap roadmap={section.roadmap} />}{section.workflow && <Workflow data={section.workflow} />}{section.problemCards && <ProblemInsight section={section} />}{section.pilotSteps && <PilotSteps section={section} />}</div>;
+  return (
+    <div className="flex h-full min-h-0 flex-col justify-center overflow-visible">
+      <div className="mb-5 flex items-center gap-4">
+        <span className="rounded-full bg-[#FF0508] px-3 py-1 text-xs font-black tracking-widest text-white">{section.id}</span>
+        <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#33373B]/45">{section.eyebrow}</span>
+      </div>
+      <h1 className={cx("max-w-[780px] font-black text-[#33373B]", titleClass)}>{section.title}</h1>
+      <p className="mt-4 max-w-[700px] text-[clamp(17px,1.45vw,20px)] leading-[1.3] tracking-[-0.02em] text-[#33373B]/72">{section.subtitle}</p>
+      {section.formula && <div className="mt-7 max-w-[620px] rounded-[28px] border border-black/5 bg-white/70 p-5 text-lg font-bold leading-tight text-[#33373B] shadow-sm">{section.formula}</div>}
+      {section.points && (
+        <div className="mt-5 grid max-w-[780px] gap-3 md:grid-cols-2">
+          {section.points.map((p) => (
+            <div key={p} className="flex items-start gap-3 rounded-2xl border border-black/5 bg-white/55 p-3 text-[15px] font-medium text-[#33373B]/80">
+              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FF0508] text-white"><Check size={14}/></span>
+              <span>{p}</span>
+            </div>
+          ))}
+        </div>
+      )}
+      {section.beforeAfter && <BeforeAfter data={section.beforeAfter} />}
+      {section.cards && <Cards cards={section.cards} />}
+      {section.columns && <Columns columns={section.columns} />}
+      {section.roadmap && <Roadmap roadmap={section.roadmap} />}
+      {section.workflow && <Workflow data={section.workflow} />}
+      {section.problemCards && <ProblemInsight section={section} />}
+      {section.pilotSteps && <PilotSteps section={section} />}
+    </div>
+  );
 }
 function ProofBlock({ data, className = "mt-7" }) {
   const items = Array.isArray(data) ? data : [data];

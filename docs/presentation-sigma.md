@@ -5,7 +5,7 @@
 
 ## Общая информация
 
-- **Всего слайдов:** 16
+- **Всего слайдов:** 17
 - **Фреймворк:** React 19 + Vite + Tailwind CSS
 - **Точка входа:** `src/App.jsx`
 - **Основной визуальный стиль:** MOEX Sigma Core (токены, цвета, типографика)
@@ -14,26 +14,33 @@
 
 | # | Раздел | Тип визуала | Примечание |
 |---|--------|-------------|------------|
-| 01 | Sigma AI Native | `platform` | Hero-слайд |
-| 02 | Проблема | `break` | Документация не успевает |
-| 03 | Итог проблемы | `insight` | Правила отдельно |
-| 04 | Сдвиг | `transform` | Before / After |
-| 05 | Внутреннее устройство | `codefiles` | `Так выглядит<br>Sigma изнутри` |
-| 06 | Архитектура | `stack` | Core → Product Layer → Skills |
-| **07** | **Process Garden / MPG** | **`case-comparison`** | **Real before/after screenshots** |
-| **08** | **Orbit** | **`case-comparison`** | **Real before/after screenshots** |
-| 09 | Внутренние сервисы | `service` | Презентация в шаблоне |
-| **10** | **Email-дайджест** | **`mockup` → custom** | **Scrollable local HTML preview** |
-| 11 | Рабочий сценарий | `case` | Запрос → ревью интерфейса |
-| 12 | Операционная модель | `hub` | AI берёт рутину |
-| 13 | Подключение продуктов | `bridge` | Два сценария |
-| 14 | Ценность для команды | `review` | Что получает команда |
-| 15 | Roadmap | `roadmap` | Пилоты и масштабирование |
-| 16 | Пилот | `portal` | Запуск пилота: три шага |
+| 01 | План встречи | `agenda` | Участники и темы по порядку |
+| 02 | Sigma AI Native | `platform` | Hero-слайд |
+| 03 | Проблема | `break` | Документация не успевает |
+| 04 | Итог проблемы | `insight` | Правила отдельно |
+| 05 | Сдвиг | `transform` | Before / After |
+| 06 | Внутреннее устройство | `codefiles` | `Так выглядит<br>Sigma изнутри` |
+| 07 | Архитектура | `stack` | Core → Product Layer → Skills |
+| **08** | **Process Garden / MPG** | **`case-comparison`** | **Real before/after screenshots** |
+| **09** | **Orbit** | **`case-comparison`** | **Real before/after screenshots** |
+| 10 | Внутренние сервисы | `service` | Презентация в шаблоне |
+| **11** | **Email-дайджест** | **`mockup` → custom** | **Scrollable local HTML preview** |
+| 12 | Рабочий сценарий | `case` | Запрос → ревью интерфейса |
+| 13 | Операционная модель | `hub` | AI берёт рутину |
+| 14 | Подключение продуктов | `bridge` | Два сценария |
+| 15 | Ценность для команды | `review` | Что получает команда |
+| 16 | Roadmap | `roadmap` | Пилоты и масштабирование |
+| 17 | Пилот | `portal` | Запуск пилота: три шага |
 
 ## Специфические слайды
 
-### Слайд 02 — Проблема
+### Слайд 01 — План встречи
+
+- **Тип:** `AgendaVisual` (code-based, кастомный)
+- **Визуал:** вертикальный список из 5 карточек с номерами, аватарами и полным текстом без обрезания
+- **Участники:** Василий Акулов, Игорь Семёнов, Владислав Асламов, Андрей Миренков, Константин Афанасьев (в порядке выступления)
+
+### Слайд 03 — Проблема
 
 - **Тип:** `BreakVisual` (code-based, кастомный)
 - **Визуал:** code-based схема расхождения версий без внешних PNG.
@@ -44,7 +51,7 @@
   - Справа снизу: `PRODUCT / V4`
 - **Смысл:** документация (V1) и продукты (V3, V4) живут отдельно, синхронизация нарушена.
 
-### Слайд 07 — Process Garden / MPG
+### Слайд 08 — Process Garden / MPG
 
 - **Тип:** CaseComparisonSlide (кастомный full-width layout)
 - **Визуал:** `public/cases/process-garden-before.png` + `public/cases/process-garden-after.png`
@@ -52,14 +59,14 @@
 - **Статус:** benchmark, идёт сборка
 - **Метка на слайде:** `пилот · идёт сборка` (через CSS, не в данных)
 
-### Слайд 08 — Orbit
+### Слайд 09 — Orbit
 
 - **Тип:** CaseComparisonSlide (кастомный full-width layout)
 - **Визуал:** `public/cases/orbit-before.png` + `public/cases/orbit-after.png`
-- **Proof:** Андрей Бурилов, Алексей Яковенко
+- **Proof:** Андрей Бурилов, Алексей Яковенко, Владимир Суровцев
 - **Смысл:** был Sigma Core без product layer → стал Sigma Core + Orbit product layer
 
-### Слайд 10 — Email-дайджест
+### Слайд 11 — Email-дайджест
 
 - **Тип:** CommunicationCaseSlide (кастомный двухколоночный layout, 0.6fr / 1.4fr)
 - **Компонент:** `ScrollableEmailPreview` — кодовый mail-frame с письмом внутри
@@ -101,12 +108,12 @@
 
 | Файл | Разрешение | Слайд |
 |------|------------|-------|
-| `process-garden-before.png` | 1360×873 | 07 |
-| `process-garden-after.png` | 1354×898 | 07 |
-| `orbit-before.png` | 1354×908 | 08 |
-| `orbit-after.png` | 1354×908 | 08 |
-| `design-digest-email-preview.html` | — | 10 |
-| `design-digest-email-mockup-cropped.png` | 990×1287 | 10 (fallback) |
+| `process-garden-before.png` | 1360×873 | 08 |
+| `process-garden-after.png` | 1354×898 | 08 |
+| `orbit-before.png` | 1354×908 | 09 |
+| `orbit-after.png` | 1354×908 | 09 |
+| `design-digest-email-preview.html` | — | 11 |
+| `design-digest-email-mockup-cropped.png` | 990×1287 | 11 (fallback) |
 
 ## Комментарии по разработке
 
